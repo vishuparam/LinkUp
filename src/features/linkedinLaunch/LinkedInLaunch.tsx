@@ -34,7 +34,7 @@ function EntryList({ entries }: { entries: ProfileEntry[] }) {
       {entry.description && <p className="mt-2 leading-relaxed text-stone-700">{entry.description}</p>}
       {entry.skills.length > 0 && <p className="mt-2 text-sm text-stone-600">Skills: {entry.skills.join(', ')}</p>}
       {entry.links && <div className="mt-2 flex flex-wrap gap-4">{entry.links.map(link =>
-        <a className="text-sm font-medium text-emerald-800 underline" href={link.url} target="_blank" rel="noopener noreferrer" key={link.url}>{link.label}</a>)}</div>}
+        <a className="text-link" href={link.url} target="_blank" rel="noopener noreferrer" key={link.url}>{link.label}</a>)}</div>}
     </article>)}</div>;
 }
 
@@ -73,7 +73,7 @@ export function LinkedInLaunch({ user, mentors, sourceLabel }: LinkedInLaunchPro
   }
 
   return <div className="max-w-4xl space-y-5">
-    <p className="text-sm text-stone-600">{sourceLabel || (!user ? 'Fictional LinkedIn Launch example' : 'Review each section before copying it to LinkedIn.')}</p>
+    <p className="demo-notice">{sourceLabel || (!user ? 'Fictional LinkedIn Launch example' : 'Review each section before copying it to LinkedIn.')}</p>
     {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-800" role="alert">{error}</p>}
     <div className="flex flex-wrap gap-3">
       <Button onClick={() => handleCopy('all')}>{copied === 'all' ? 'Copied!' : 'Copy all'}</Button>

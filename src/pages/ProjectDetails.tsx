@@ -1,31 +1,134 @@
-import { Link, useParams } from 'react-router-dom';
-import { PageContainer } from '../components/PageContainer';
-import { Button } from '../components/Button';
-import { Tag } from '../components/Tag';
-import { useDemo } from '../context/DemoContext';
-
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { PageContainer } from "../components/PageContainer";
+import { Button } from "../components/Button";
+import { Tag } from "../components/Tag";
+import { useDemo } from "../context/DemoContext";
 export function ProjectDetails() {
   const { id } = useParams();
   const { opportunities, savedIds, toggleSaved } = useDemo();
-  const opportunity = opportunities.find(item => item.id === id);
-  if (!opportunity) return <PageContainer title="Opportunity not found" description="This opportunity may have been a demo that reset on refresh."><Link className="button button-primary" to="/discover">Back to Discover</Link></PageContainer>;
-  const saved = savedIds.includes(opportunity.id);
-  return <PageContainer title={opportunity.name} description={opportunity.shortDescription}>
-    <Link to="/discover" className="mb-6 inline-block text-sm font-semibold text-emerald-800">← Back to Discover</Link>
-    <div className="grid items-start gap-6 md:grid-cols-[2fr_1fr]">
-      <article className="panel">
-        <div className="flex flex-wrap gap-2"><Tag>{opportunity.type}</Tag><Tag>{opportunity.field}</Tag></div>
-        <h2 className="mb-3 mt-7 text-xl font-bold">What we're building</h2><p className="whitespace-pre-line leading-relaxed text-stone-600">{opportunity.fullDescription}</p>
-        <h2 className="mb-3 mt-7 text-xl font-bold">Skills that could help</h2><div className="flex flex-wrap gap-2">{opportunity.skillsNeeded.map(skill => <Tag key={skill}>{skill}</Tag>)}</div>
-        <h2 className="mb-3 mt-7 text-xl font-bold">Room on the team</h2><ul className="list-inside list-disc space-y-2 text-stone-600">{opportunity.rolesNeeded.map(role => <li key={role}>{role}</li>)}</ul>
-        {!!opportunity.applicationQuestions?.length && <><h2 className="mb-3 mt-7 text-xl font-bold">Questions for future applicants</h2><ul className="list-inside list-disc space-y-2 text-stone-600">{opportunity.applicationQuestions.map(question => <li key={question}>{question}</li>)}</ul></>}
-      </article>
-      <aside className="panel space-y-5">
-        <div><h2 className="font-semibold">Created by {opportunity.creator.name}</h2><p className="mt-1 text-sm text-stone-500">Grade {opportunity.creator.grade} · Demo student</p></div>
-        <p className="text-sm text-stone-600">{opportunity.location}<br />{opportunity.remote ? 'Remote teammates welcome' : 'In-person collaboration'}</p>
-        <Button aria-pressed={saved} onClick={() => toggleSaved(opportunity.id)}>{saved ? 'Saved ✓' : 'Save opportunity'}</Button>
-        <p className="text-xs leading-relaxed text-stone-500">Applications are planned for a later step. This foundation only shows opportunity information.</p>
-      </aside>
-    </div>
-  </PageContainer>;
+  const [applyNotice, setApplyNotice] = useState(false);
+  const item = opportunities.find((opportunity) => opportunity.id === id);
+  if (!item)
+    return (
+      <PageContainer
+        title="Opportunity not found"
+        description="This opportunity may have been a demo that reset on refresh."
+      >
+        <Link className="button button-primary" to="/discover">
+          Back to Discover
+        </Link>
+      </PageContainer>
+    );
+  const saved = savedIds.includes(item.id);
+  return (
+    <section>
+      <Link to="/discover" className="text-link">
+        ← Back to Discover
+      </Link>
+      <div className="detail-grid">
+        <article className="panel">
+          <div className="detail-header">
+            <div className="flex flex-wrap gap-2">
+              <Tag>{item.type}</Tag>
+              <Tag>{item.field}</Tag>
+            </div>
+            <h1>{item.name}</h1>
+            <p>{item.shortDescription}</p>
+          </div>
+          <div className="detail-section">
+            <h2>About the idea</h2>
+            <p>{item.fullDescription}</p>
+          </div>
+          <div className="detail-section">
+            <h2>Roles needed</h2>
+            <ul className="list-inside list-disc">
+              {item.rolesNeeded.map((role) => (
+                <li key={role}>{role}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="detail-section">
+            <h2>Skills that could help</h2>
+            <div className="flex flex-wrap gap-2">
+              {item.skillsNeeded.map((skill) => (
+                <Tag key={skill}>{skill}</Tag>
+              ))}
+            </div>
+          </div>
+          {!!item.applicationQuestions?.length && (
+            <div className="detail-section">
+              <h2>A few things the team would love to know</h2>
+              <p>Future applications may include these questions:</p>
+              <ol className="mt-3 list-inside list-decimal">
+                {item.applicationQuestions.map((question, index) => (
+                  <li key={index}>{question}</li>
+                ))}
+              </ol>
+            </div>
+          )}
+        </article>
+        <aside className="panel detail-side">
+          <p className="eyebrow">MEET THE BUILDER</p>
+          <div className="card-person mt-5">
+            <span className="avatar">
+              {item.creator.name
+                .split(" ")
+                .map((word) => word[0])
+                .join("")}
+            </span>
+            <div>
+              <h2 className="text-base font-semibold">{item.creator.name}</h2>
+              <small>Grade {item.creator.grade} · Demo student</small>
+            </div>
+          </div>
+          <dl className="detail-facts">
+            <div>
+              <dt>Location</dt>
+              <dd>{item.location}</dd>
+            </div>
+            <div>
+              <dt>How we work</dt>
+              <dd>{item.remote ? "Remote welcome" : "In person"}</dd>
+            </div>
+            <div>
+              <dt>Field</dt>
+              <dd>{item.field}</dd>
+            </div>
+            <div>
+              <dt>Opportunity</dt>
+              <dd>{item.type}</dd>
+            </div>
+          </dl>
+          <Button
+            onClick={() => setApplyNotice(true)}
+            aria-describedby="application-note"
+          >
+            Apply to join <span aria-hidden="true">↗</span>
+          </Button>
+          <Button
+            variant="secondary"
+            aria-pressed={saved}
+            onClick={() => toggleSaved(item.id)}
+          >
+            {saved ? "Saved ✓" : "Save opportunity"}
+          </Button>
+          <p
+            id="application-note"
+            className="text-xs leading-relaxed text-stone-500"
+          >
+            Demo preview only. Applications are not sent.
+            {!!item.applicationQuestions?.length &&
+              " This team has application questions."}
+          </p>
+          {applyNotice && (
+            <p role="status" className="demo-notice mt-4">
+              You're exploring a fictional opportunity. Applying will be
+              available in a future version; nothing has been submitted.
+            </p>
+          )}
+        </aside>
+      </div>
+    </section>
+  );
 }

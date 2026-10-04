@@ -1,14 +1,49 @@
-import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { Navbar } from './Navbar';
-
+import { useEffect, useRef } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
+import { Navbar } from "./Navbar";
 export function Layout() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
-  return <div className="flex min-h-screen flex-col">
-    <a href="#main-content" className="skip-link">Skip to content</a>
-    <Navbar />
-    <main id="main-content" className="mx-auto w-full max-w-6xl flex-1 px-5 py-10 sm:px-8 sm:py-14"><Outlet /></main>
-    <footer className="border-t border-stone-200 px-5 py-6 text-center text-xs leading-relaxed text-stone-500">LinkUp · Frontend demo · All sample people and opportunities are fictional.</footer>
-  </div>;
+  const previous = useRef(pathname);
+  const main = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = `${pathname === "/" ? "Build something together" : pathname.split("/")[1].replaceAll("-", " ")} | LinkUp`;
+    if (previous.current !== pathname)
+      main.current?.focus({ preventScroll: true });
+    previous.current = pathname;
+  }, [pathname]);
+  return (
+    <div className="site-shell">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
+      <Navbar />
+      <main
+        ref={main}
+        tabIndex={-1}
+        id="main-content"
+        className={pathname === "/" ? "landing-main" : "app-main"}
+      >
+        <motion.div
+          key={pathname}
+          initial={reduced ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduced ? 0 : 0.2 }}
+        >
+          <Outlet />
+        </motion.div>
+      </main>
+      <footer className="site-footer">
+        <Link className="brand" to="/">
+          LinkUp.
+        </Link>
+        <p>Less waiting. More making.</p>
+        <span>
+          Frontend demo · All sample people and opportunities are fictional.
+        </span>
+      </footer>
+    </div>
+  );
 }

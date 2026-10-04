@@ -1,15 +1,54 @@
-import { PageContainer } from '../components/PageContainer';
-import { Tag } from '../components/Tag';
-import { demoUser } from '../data/demo';
-
+import { PageContainer } from "../components/PageContainer";
+import { Tag } from "../components/Tag";
+import { OpportunityGrid } from "../components/OpportunityGrid";
+import { useDemo } from "../context/DemoContext";
+import { demoUser } from "../data/demo";
 export function Profile() {
-  return <PageContainer title="Your profile" description="A simple introduction to what you enjoy and what you can bring to a team.">
-    <article className="panel max-w-2xl">
-      <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700">Fictional demo profile</p>
-      <h2 className="mt-4 text-2xl font-bold">{demoUser.name}</h2><p className="mt-1 text-sm text-stone-500">Grade {demoUser.grade}</p>
-      <p className="mt-5 leading-relaxed text-stone-600">{demoUser.bio}</p>
-      <h3 className="mb-3 mt-6 font-semibold">Skills</h3><div className="flex flex-wrap gap-2">{demoUser.skills.map(skill => <Tag key={skill}>{skill}</Tag>)}</div>
-      <h3 className="mb-3 mt-6 font-semibold">Interests</h3><div className="flex flex-wrap gap-2">{demoUser.interests.map(interest => <Tag key={interest}>{interest}</Tag>)}</div>
-    </article>
-  </PageContainer>;
+  const { opportunities } = useDemo();
+  return (
+    <PageContainer
+      title="Your profile"
+      description="A little about you. A lot of possibility."
+    >
+      <article className="profile-card">
+        <div className="profile-banner" aria-hidden="true" />
+        <div className="profile-content">
+          <span className="avatar profile-avatar">AR</span>
+          <div className="profile-columns">
+            <div>
+              <span className="eyebrow">STUDENT BUILDER · DEMO PROFILE</span>
+              <h2>{demoUser.name}</h2>
+              <p>Grade {demoUser.grade} · Here to learn by doing</p>
+              <p>{demoUser.bio}</p>
+            </div>
+            <div>
+              <h3>WHAT I BRING</h3>
+              <div className="flex flex-wrap gap-2">
+                {demoUser.skills.map((skill) => (
+                  <Tag key={skill}>{skill}</Tag>
+                ))}
+              </div>
+              <h3 className="mt-6">WHAT I'M CURIOUS ABOUT</h3>
+              <div className="flex flex-wrap gap-2">
+                {demoUser.interests.map((interest) => (
+                  <Tag key={interest}>{interest}</Tag>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <div className="results-heading">
+        <h2 className="text-xl font-semibold text-stone-900">
+          Things I'm building
+        </h2>
+        <span>Small starts count.</span>
+      </div>
+      <OpportunityGrid
+        opportunities={opportunities.filter(
+          (item) => item.creator.id === demoUser.id,
+        )}
+      />
+    </PageContainer>
+  );
 }
