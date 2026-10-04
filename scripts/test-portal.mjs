@@ -10,7 +10,7 @@ page.on("pageerror", (e) => errors.push(e.message));
 page.on("console", (m) => {
   if (m.type() === "error") errors.push(m.text());
 });
-const base = "http://127.0.0.1:5173";
+const base = process.env.LINKUP_TEST_BASE || "http://127.0.0.1:5173";
 try {
   await page.goto(base);
   await page.waitForFunction(

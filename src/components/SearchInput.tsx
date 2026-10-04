@@ -1,6 +1,24 @@
-export function SearchInput({ value, onChange }: { value: string; onChange: (value: string) => void }) {
-  return <div className="flex-1">
-    <label className="label" htmlFor="opportunity-search">Search opportunities</label>
-    <input id="opportunity-search" type="search" placeholder="Try design, science, or React…" value={value} onChange={event => onChange(event.target.value)} />
-  </div>;
+import { Icon } from "./Icon";
+export function SearchInput({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div className="search-control">
+      <label className="sr-only" htmlFor="opportunity-search">
+        Search opportunities
+      </label>
+      <Icon name="search" />
+      <input
+        id="opportunity-search"
+        type="search"
+        placeholder="Search projects, skills, or interests"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
+    </div>
+  );
 }

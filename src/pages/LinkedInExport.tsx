@@ -8,10 +8,7 @@ export function LinkedInExport() {
       description="Give the things you build a place in your story."
     >
       <div className="panel placeholder">
-        <span className="placeholder-symbol" aria-hidden="true">
-          ↗
-        </span>
-        <p className="eyebrow mb-3">YOUR STORY, COMING SOON</p>
+        <p className="feature-status">Coming soon</p>
         <h2 className="text-2xl font-semibold">
           Built something? Let it speak.
         </h2>

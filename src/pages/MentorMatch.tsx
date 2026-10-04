@@ -8,10 +8,7 @@ export function MentorMatch() {
       description="A little guidance can unlock a big idea."
     >
       <div className="panel placeholder">
-        <span className="placeholder-symbol" aria-hidden="true">
-          ✳
-        </span>
-        <p className="eyebrow mb-3">A NEW CONNECTION, COMING SOON</p>
+        <p className="feature-status">Coming soon</p>
         <h2 className="text-2xl font-semibold">
           Big questions. A little guidance.
         </h2>
