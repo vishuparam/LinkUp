@@ -15,7 +15,7 @@ page.on("pageerror", (error) => errors.push(error.message));
 page.on("console", (message) => {
   if (message.type() === "error") errors.push(message.text());
 });
-const base = "http://127.0.0.1:5173";
+const base = process.env.LINKUP_TEST_BASE || "http://127.0.0.1:5173";
 await mkdir("test-results", { recursive: true });
 async function cards(count) {
   await page.waitForFunction(
@@ -25,6 +25,20 @@ async function cards(count) {
   );
 }
 async function nav(label) {
+  if (["Saved", "Your Projects"].includes(label)) {
+    await page.getByRole("link", { name: "Profile", exact: true }).click();
+    await page
+      .getByRole("link", {
+        name: label === "Saved" ? "Saved opportunities" : "Your projects",
+        exact: true,
+      })
+      .click();
+    return;
+  }
+  if (label === "Profile") {
+    await page.getByRole("link", { name: "Profile", exact: true }).click();
+    return;
+  }
   if (
     await page
       .getByRole("button", { name: "Open menu", exact: true })
@@ -124,7 +138,7 @@ try {
     await page.getByText("No matches yet.").waitFor();
     await page.getByRole("button", { name: "Clear filters" }).click();
     await cards(5);
-    await page.getByRole("button", { name: "Company", exact: true }).click();
+    await page.getByLabel("Type", { exact: true }).selectOption("Company");
     await cards(1);
     await page.getByRole("button", { name: "Clear filters" }).click();
     await page.getByLabel("Skill", { exact: true }).selectOption("Writing");
@@ -138,7 +152,7 @@ try {
       .click();
     await nav("Saved");
     await cards(1);
-    await page.getByRole("link", { name: "View opportunity" }).click();
+    await page.getByRole("link", { name: "Learn more" }).click();
     await page.getByRole("heading", { level: 1, name: "Sprout Map" }).waitFor();
     await page.getByRole("button", { name: "Apply to join" }).click();
     await page
@@ -172,13 +186,13 @@ try {
     await page.getByLabel("Roles needed").fill("Researcher, Editor");
     await page.getByLabel("Location").fill("Anywhere");
     await page
-      .getByRole("button", { name: "+ Add question", exact: true })
+      .getByRole("button", { name: "Add question", exact: true })
       .click();
     await page
       .getByLabel("Application question 1")
       .fill("What would you like to learn?");
     await page
-      .getByRole("button", { name: "+ Add question", exact: true })
+      .getByRole("button", { name: "Add question", exact: true })
       .click();
     await page.getByRole("button", { name: "Remove question 2" }).click();
     await page.getByRole("button", { name: "Create demo opportunity" }).click();
@@ -198,6 +212,9 @@ try {
       .waitFor();
     await nav("Discover");
     await cards(6);
+    await page.reload();
+    await cards(6); // Main preserves created ideas across refreshes.
+    await page.evaluate(() => localStorage.removeItem("linkup-created-opportunities-v1"));
     await page.reload();
     await cards(5);
     await page.waitForTimeout(300);

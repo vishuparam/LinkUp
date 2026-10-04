@@ -38,21 +38,22 @@ export function Discover() {
       title="Find your people. Build your thing."
       description="Good ideas need different kinds of people. Find a team that needs someone like you."
     >
-      <div className="filter-panel">
+      <div className="discovery-filters">
+        <SearchInput value={query} onChange={setQuery} />
         <div className="filter-row">
-          <SearchInput value={query} onChange={setQuery} />
           <div>
-            <label className="label" htmlFor="field-filter">
-              Field
+            <label className="label" htmlFor="type-filter">
+              Type
             </label>
             <select
-              id="field-filter"
-              value={field}
-              onChange={(event) => setField(event.target.value)}
+              id="type-filter"
+              value={type}
+              onChange={(event) => setType(event.target.value)}
             >
-              <option value="All">All fields</option>
-              {fields.map((value) => (
-                <option key={value}>{value}</option>
+              {["All", "Project", "Nonprofit", "Company"].map((value) => (
+                <option key={value} value={value}>
+                  {value === "All" ? "All types" : value}
+                </option>
               ))}
             </select>
           </div>
@@ -71,23 +72,25 @@ export function Discover() {
               ))}
             </select>
           </div>
-        </div>
-        <div className="filter-bottom">
-          <div className="type-tabs" role="group" aria-label="Opportunity type">
-            {["All", "Project", "Nonprofit", "Company"].map((value) => (
-              <button
-                key={value}
-                className={type === value ? "selected" : ""}
-                aria-pressed={type === value}
-                onClick={() => setType(value)}
-              >
-                {value === "All" ? "All opportunities" : value}
-              </button>
-            ))}
+          <div>
+            <label className="label" htmlFor="field-filter">
+              Field
+            </label>
+            <select
+              id="field-filter"
+              value={field}
+              onChange={(event) => setField(event.target.value)}
+            >
+              <option value="All">All fields</option>
+              {fields.map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
           </div>
           {filtered && (
             <Button
               variant="secondary"
+              className="clear-filters"
               onClick={() => {
                 setQuery("");
                 setType("All");
@@ -105,7 +108,6 @@ export function Discover() {
           <strong>{visible.length}</strong>{" "}
           {visible.length === 1 ? "opportunity" : "opportunities"} to explore
         </p>
-        <span>Curiosity looks good on you.</span>
       </div>
       <OpportunityGrid
         opportunities={visible}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PageContainer } from "../components/PageContainer";
 import { Button } from "../components/Button";
 import { useDemo } from "../context/DemoContext";
+import { Icon } from "../components/Icon";
 import { demoUser } from "../data/demo";
 import type { OpportunityType } from "../types";
 export function Create() {
@@ -55,7 +56,7 @@ export function Create() {
           </p>
           <section className="form-section">
             <h2>
-              <span>01</span>Basic information
+              <span>01</span>What are you building?
             </h2>
             <p className="form-hint">
               A name and a little context to help your idea get discovered.
@@ -102,7 +103,7 @@ export function Create() {
           </section>
           <section className="form-section">
             <h2>
-              <span>02</span>What are you building?
+              <span>02</span>About it
             </h2>
             <p className="form-hint">
               Keep the short version clear. Use the full description to tell
@@ -208,7 +209,7 @@ export function Create() {
           </section>
           <section className="form-section">
             <h2>
-              <span>05</span>Application options
+              <span>05</span>Optional application questions
             </h2>
             <p className="form-hint">
               Optional questions help teammates introduce themselves. Add up to
@@ -245,7 +246,7 @@ export function Create() {
                     )
                   }
                 >
-                  ×
+                  <Icon name="close" />
                 </Button>
               </div>
             ))}
@@ -259,15 +260,14 @@ export function Create() {
                 ])
               }
             >
-              + Add question
+              Add question
             </Button>
           </section>
           <Button className="form-submit" type="submit">
-            Create demo opportunity <span aria-hidden="true">↗</span>
+            Create demo opportunity
           </Button>
         </form>
         <aside className="form-aside">
-          <p className="eyebrow">A NOTE BEFORE YOU START</p>
           <h2>
             Small starts.
             <br />

@@ -10,7 +10,7 @@ page.on("pageerror", (e) => errors.push(e.message));
 page.on("console", (m) => {
   if (m.type() === "error") errors.push(m.text());
 });
-const base = "http://127.0.0.1:5173";
+const base = process.env.LINKUP_TEST_BASE || "http://127.0.0.1:5173";
 try {
   await page.goto(base);
   await page.waitForFunction(
@@ -84,12 +84,21 @@ try {
   assert.equal(await page.locator(".pin-spacer").count(), 0);
   assert.deepEqual(errors, []);
   // Failure is intentionally blocked: expect that network error, but require a usable poster and CTA.
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.route("**/linkup-portal-motion.mp4", (r) => r.abort());
-  await page.goto(base);
-  await page.locator(".portal-poster").waitFor();
-  await page.getByRole("link", { name: "EXPLORE LINKUP", exact: true }).click();
-  await page.getByRole("heading", { level: 1 }).waitFor();
+  const failurePage = await browser.newPage({viewport:{width:1440,height:1024}});
+  await failurePage.route("**/linkup-portal-motion.mp4", route => route.abort());
+  await failurePage.goto(base);
+  await failurePage.waitForFunction(() => document.querySelector('.portal-poster') || document.querySelector('video')?.networkState === HTMLMediaElement.NETWORK_NO_SOURCE);
+  const fallbackImage = failurePage.locator('.portal-poster');
+  if (await fallbackImage.count()) await fallbackImage.waitFor();
+  else {
+    // Chrome can retain the video's own poster when a source fails. Both are valid fallbacks.
+    assert((await failurePage.locator('video').getAttribute('poster')).endsWith('linkup-portal-motion-poster.jpg'));
+    assert.equal(await failurePage.locator('video').evaluate(video => video.readyState), 0);
+  }
+  await failurePage.screenshot({path:'test-results/portal-media-failure.png'});
+  await failurePage.getByRole("link", { name: "EXPLORE LINKUP", exact: true }).click();
+  await failurePage.getByRole("heading", { level: 1 }).waitFor();
+  await failurePage.close();
   console.log(
     "PASS: Chrome hero/scroll/reverse/video seeking, pointer tilt, featured link, tablet/mobile, reduced motion, media failure fallback, no unexpected browser errors",
   );

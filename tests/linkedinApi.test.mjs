@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { test } from 'vitest';
 import { handleLinkedInApi } from '../server/linkedin/api.mjs';
 import { sanitizeProfile } from '../server/linkedin/sanitize.mjs';
 import { generateWithGroq } from '../server/linkedin/provider.mjs';

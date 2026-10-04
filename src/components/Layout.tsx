@@ -37,7 +37,7 @@ export function Layout() {
       </main>
       <footer className="site-footer">
         <Link className="brand" to="/">
-          LinkUp.
+          LinkUp
         </Link>
         <p>Less waiting. More making.</p>
         <span>

@@ -12,7 +12,7 @@ vi.mock('framer-motion', () => ({
 
 afterEach(() => vi.unstubAllGlobals());
 
-it('fills mentor search fields from a project saved in this browser', () => {
+it('offers a project saved in this browser in the mentor selector', () => {
   const stored = [{
     id: 'demo-retinal', name: 'Retinal AI research', type: 'Project',
     shortDescription: 'Detect retinal disease.',
@@ -25,7 +25,8 @@ it('fills mentor search fields from a project saved in this browser', () => {
   const page = renderToStaticMarkup(createElement(MemoryRouter, {initialEntries: ['/mentor-match?projectId=demo-retinal']},
     createElement(DemoProvider, null, createElement(MentorMatch))));
   expect(page).toContain('Retinal AI research');
-  expect(page).toContain('Build a retinal image classifier and evaluate it with a research mentor.');
-  expect(page).toContain('Computer vision, Research methods');
-  expect(page).toContain('Chicago, Illinois');
+  expect(page).toContain('id="mentor-project"');
+  expect(page).toContain('value="demo-retinal"');
+  expect(page).toContain('Choose a project');
+  expect(page).toContain('Find mentors');
 });

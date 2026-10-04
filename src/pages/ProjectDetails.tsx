@@ -25,7 +25,7 @@ export function ProjectDetails() {
   return (
     <section>
       <Link to="/discover" className="text-link">
-        ← Back to Discover
+        Back to Discover
       </Link>
       <div className="detail-grid">
         <article className="panel">
@@ -105,14 +105,14 @@ export function ProjectDetails() {
             onClick={() => setApplyNotice(true)}
             aria-describedby="application-note"
           >
-            Apply to join <span aria-hidden="true">↗</span>
+            Apply to join
           </Button>
           <Button
             variant="secondary"
             aria-pressed={saved}
             onClick={() => toggleSaved(item.id)}
           >
-            {saved ? "Saved ✓" : "Save opportunity"}
+            {saved ? "Saved" : "Save opportunity"}
           </Button>
           {item.creator.id === demoUser.id && <Link className="button button-secondary" to={`/mentor-match?projectId=${encodeURIComponent(item.id)}`}>Find a mentor for this idea</Link>}
           <p

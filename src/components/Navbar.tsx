@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Icon } from "./Icon";
 const links = [
   ["/discover", "Discover"],
-  ["/saved", "Saved"],
-  ["/your-projects", "Your Projects"],
-  ["/profile", "Profile"],
+  ["/create", "Create"],
   ["/mentor-match", "Mentor Match"],
   ["/linkedin-export", "LinkedIn Export"],
 ];
@@ -37,13 +36,6 @@ export function Navbar() {
           {label}
         </NavLink>
       ))}
-      <NavLink
-        className="button button-primary nav-create"
-        to="/create"
-        onClick={() => setOpen(false)}
-      >
-        Create <span aria-hidden="true">↗</span>
-      </NavLink>
     </>
   );
   return (
@@ -58,14 +50,19 @@ export function Navbar() {
     >
       <div className="nav-inner">
         <Link to="/" className="brand" aria-label="LinkUp home">
-          <span className="brand-symbol" aria-hidden="true">
-            ↗
-          </span>
-          LinkUp<span className="brand-dot">.</span>
+          LinkUp
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {navigation}
         </nav>
+        <NavLink
+          to="/profile"
+          className="profile-control"
+          aria-label="Profile"
+          title="Your profile"
+        >
+          <Icon name="profile" />
+        </NavLink>
         <button
           ref={toggle}
           className="menu-toggle"
@@ -74,7 +71,7 @@ export function Navbar() {
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen(!open)}
         >
-          <span aria-hidden="true">{open ? "✕" : "☰"}</span>
+          <Icon name={open ? "close" : "menu"} />
         </button>
       </div>
       <AnimatePresence initial={false}>

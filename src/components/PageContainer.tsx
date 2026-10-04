@@ -11,7 +11,6 @@ export function PageContainer({
   return (
     <section>
       <div className="page-heading">
-        <p className="eyebrow">YOUR NEXT CHAPTER</p>
         <h1>{title}</h1>
         {description && <p className="page-description">{description}</p>}
       </div>
