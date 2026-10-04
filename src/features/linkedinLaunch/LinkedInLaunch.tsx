@@ -4,19 +4,20 @@ import { Tag } from '../../components/Tag';
 import { linkedInLaunchDemoUser } from './demo';
 import { allSectionsText, copyText, sectionLabels, sectionText, type KitSection } from './export';
 import { generateLinkedInProfile } from './generate';
-import type { LinkedInLaunchSource, ProfileEntry, SourceMentor } from './types';
+import type { LinkedInLaunchSource, LinkedInProfileKit, ProfileEntry, SourceMentor } from './types';
 
 export interface LinkedInLaunchProps {
   user?: LinkedInLaunchSource;
   /** Mentor Match may pass explicitly shareable facts later. */
   mentors?: SourceMentor[];
   sourceLabel?: string;
+  kit?: LinkedInProfileKit;
 }
 
 const order: KitSection[] = ['headline', 'about', 'experience', 'projects', 'skills', 'honors', 'volunteering', 'mentorship', 'suggestedPost'];
 const emptyMessages: Partial<Record<KitSection, string>> = {
   experience: 'Experiences added to LinkUp can appear here.',
-  projects: 'Projects added to LinkUp can appear here.',
+  projects: 'No projects included in this kit. Select an idea above and generate again, or add an idea to LinkUp.',
   skills: 'Add skills to your profile or projects to see them here.',
   honors: 'Awards and achievements added to LinkUp can appear here.',
   volunteering: 'Nonprofit and volunteer work added to LinkUp can appear here.',
@@ -38,9 +39,10 @@ function EntryList({ entries }: { entries: ProfileEntry[] }) {
     </article>)}</div>;
 }
 
-export function LinkedInLaunch({ user, mentors, sourceLabel }: LinkedInLaunchProps) {
+export function LinkedInLaunch({ user, mentors, sourceLabel, kit: generatedKit }: LinkedInLaunchProps) {
   const source = user || linkedInLaunchDemoUser;
-  const kit = useMemo(() => generateLinkedInProfile({ ...source, mentors: mentors ?? source.mentors }), [source, mentors]);
+  const fallbackKit = useMemo(() => generateLinkedInProfile({ ...source, mentors: mentors ?? source.mentors }), [source, mentors]);
+  const kit = generatedKit || fallbackKit;
   const [copied, setCopied] = useState<KitSection | 'all' | null>(null);
   const [error, setError] = useState('');
 

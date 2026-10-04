@@ -2,10 +2,12 @@
 export interface LinkedInLaunchSource {
   id?: string;
   name?: string;
+  grade?: number;
   school?: string;
   educationLevel?: string;
   bio?: string;
   interests?: string[];
+  goals?: string[];
   skills?: string[];
   projects?: SourceProject[];
   experiences?: SourceExperience[];
@@ -20,6 +22,8 @@ export interface SourceProject {
   title?: string;
   role?: string;
   status?: 'idea' | 'in-progress' | 'completed';
+  category?: string;
+  field?: string;
   description?: string;
   startDate?: string;
   endDate?: string;

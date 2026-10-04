@@ -4,9 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "node --env-file-if-exists=.env server/index.mjs --dev",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "start": "node --env-file-if-exists=.env server/index.mjs"
   },
   "dependencies": {
     "framer-motion": "^14.0.0",

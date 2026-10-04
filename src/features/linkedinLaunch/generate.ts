@@ -8,10 +8,13 @@ const cleanMultiline = (value: unknown): string => typeof value === 'string' ? v
 function projectEntry(project: SourceProject): ProfileEntry {
   const links = ([['Website', project.links?.website], ['GitHub', project.links?.github], ['Demo', project.links?.demo]] as const)
     .flatMap(([label, url]) => url ? [{ label, url }] : []);
+  const ideaContext = project.status === 'idea'
+    ? `${project.category || 'Project'} idea${project.field ? ` in ${project.field}` : ''} shared on LinkUp.`
+    : undefined;
   return {
     title: project.name || '', role: project.role || undefined,
     dates: dateRange(project.startDate, project.endDate, project.isCurrent),
-    description: joined(project.status === 'idea' ? 'Idea shared on LinkUp.' : undefined,
+    description: joined(ideaContext,
       sentence(project.description), project.impact ? `Impact: ${sentence(project.impact)}` : undefined,
       ...(project.achievements || []).map(achievement => `Achievement: ${sentence(achievement)}`)),
     skills: cleanList([...(project.skills || []), ...(project.technologies || [])]),
@@ -31,7 +34,10 @@ function experienceEntry(value: SourceExperience): ProfileEntry {
 function headline(source: LinkedInLaunchSource): string {
   const roles = cleanList((source.experiences || []).map(e => e.title).filter(Boolean)).slice(0, 2);
   const descriptors = roles.length ? roles : [source.educationLevel ? `${source.educationLevel} Student` : 'Student'];
-  const interests = cleanList([...(source.interests || []), ...(source.skills || [])]).slice(0, 2);
+  const interests = cleanList([
+    ...(source.projects || []).map(project => project.field).filter((field): field is string => Boolean(field)),
+    ...(source.interests || []), ...(source.skills || []),
+  ]).slice(0, 2);
   return [...descriptors, ...interests].join(' | ').slice(0, 220);
 }
 
@@ -48,13 +54,20 @@ function about(source: LinkedInLaunchSource): string {
     const interests = (source.interests || []).slice(0, 3);
     paragraphs.push(`${intro}${school}${interests.length ? ` interested in ${interests.join(', ')}` : ''}.`);
   }
-  const projects = (source.projects || []).slice(0, 2).map(p => p.name).filter(Boolean);
+  const projects = (source.projects || []).slice(0, 2);
   if (projects.length) {
     const allIdeas = (source.projects || []).every(project => project.status === 'idea');
-    paragraphs.push(`${allIdeas ? "Ideas I've shared on LinkUp" : 'My projects and ideas'} include ${projects.join(' and ')}.`);
+    const details = projects.map(project =>
+      `${project.name}${project.field ? ` (${project.field})` : ''}${project.description ? `: ${sentence(project.description)}` : ''}`,
+    );
+    paragraphs.push(sentence(`${allIdeas ? "Ideas I've shared on LinkUp" : 'My projects and ideas'} include ${details.join('; ')}`));
   }
   const skills = (source.skills || []).slice(0, 4);
-  if (skills.length) paragraphs.push(`Skills I've listed on LinkUp include ${skills.join(', ')}.`);
+  const goals = (source.goals || []).slice(0, 2);
+  if (skills.length || goals.length) paragraphs.push(joined(
+    skills.length ? `Skills I've listed on LinkUp include ${skills.join(', ')}.` : undefined,
+    goals.length ? `I'm interested in ${goals.join(' and ')}.` : undefined,
+  ));
   return paragraphs.slice(0, 3).join('\n\n');
 }
 
@@ -62,9 +75,10 @@ function suggestedPost(source: LinkedInLaunchSource): string {
   const name = source.name ? `I'm ${source.name}, ` : `I'm `;
   const interest = (source.interests || []).slice(0, 2);
   const first = `${name}a student${interest.length ? ` interested in ${interest.join(' and ')}` : ''}.`;
-  const project = source.projects?.[0]?.name;
-  const isIdea = source.projects?.[0]?.status === 'idea';
-  return joined(first, project ? `${isIdea ? "I've shared an idea for" : "I've worked on"} ${project}, and I'm looking forward to sharing what I learn.` : `I'm looking forward to sharing what I learn.`);
+  const project = source.projects?.[0];
+  const isIdea = project?.status === 'idea';
+  const focus = project?.field ? ` in ${project.field}` : '';
+  return joined(first, project ? `${isIdea ? "I've shared an idea for" : "I've worked on"} ${project.name}${focus}, and I'm looking forward to sharing what I learn.` : `I'm looking forward to sharing what I learn.`);
 }
 
 /** Deterministic, offline generator. It only rephrases facts supplied by LinkUp. */

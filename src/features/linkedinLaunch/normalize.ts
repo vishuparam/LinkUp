@@ -43,6 +43,7 @@ function project(value: SourceProject): SourceProject {
   return {
     id: cleanText(value.id), name: cleanText(value.name || value.title), role: cleanText(value.role),
     status: ['idea', 'in-progress', 'completed'].includes(value.status || '') ? value.status : undefined,
+    category: cleanText(value.category), field: cleanText(value.field),
     description: cleanText(value.description), startDate: date(value.startDate), endDate: date(value.endDate),
     isCurrent: value.isCurrent === true, skills: cleanList(value.skills), technologies: cleanList(value.technologies),
     impact: cleanText(value.impact), achievements: cleanList(value.achievements), links: {
@@ -67,9 +68,11 @@ function honor(value: SourceHonor): SourceHonor {
 
 export function normalizeLinkedInSource(source: LinkedInLaunchSource = {}): LinkedInLaunchSource {
   return {
-    id: cleanText(source.id), name: cleanText(source.name), school: cleanText(source.school),
+    id: cleanText(source.id), name: cleanText(source.name),
+    grade: Number.isInteger(source.grade) && source.grade! >= 1 && source.grade! <= 12 ? source.grade : undefined,
+    school: cleanText(source.school),
     educationLevel: cleanText(source.educationLevel), bio: cleanText(source.bio),
-    interests: cleanList(source.interests), skills: cleanList(source.skills),
+    interests: cleanList(source.interests), goals: cleanList(source.goals), skills: cleanList(source.skills),
     projects: (Array.isArray(source.projects) ? source.projects : []).filter(Boolean).map(project).filter(p => p.name),
     experiences: (Array.isArray(source.experiences) ? source.experiences : []).filter(Boolean).map(experience).filter(e => e.title || e.organization),
     honors: [...(Array.isArray(source.honors) ? source.honors : []), ...(Array.isArray(source.achievements) ? source.achievements : [])]
