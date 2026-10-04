@@ -1,9 +1,7 @@
-{
+﻿{
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": { "api/find-mentors.ts": { "maxDuration": 120 } },
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
