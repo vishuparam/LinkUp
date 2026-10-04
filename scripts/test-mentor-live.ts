@@ -1,8 +1,8 @@
 import { findMentors } from '../src/mentor/index.js';
 import { publicError } from '../src/mentor/errors.js';
 const labels: Record<string, string> = {analysis: 'Analyzing project...', plan: 'Creating mentor search strategy...', discovery: 'Searching public professional sources...', verification: 'Verifying candidates...', scoring: 'Calculating match scores...', explanations: 'Selecting top matches...'};
-if (!process.env.GEMINI_API_KEY?.trim()) {
-  console.error('Set GEMINI_API_KEY locally in .env.local or your shell environment. Do not put it in source code.');
+if (!process.env.GROQ_API_KEY?.trim()) {
+  console.error('Set GROQ_API_KEY locally in .env.local or your shell environment. Do not put it in source code.');
   process.exitCode = 1;
 } else {
   try {

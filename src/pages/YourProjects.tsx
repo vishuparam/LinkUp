@@ -8,6 +8,7 @@ export function YourProjects() {
   const { opportunities } = useDemo();
   return <PageContainer title="Your ideas, taking shape" description="Opportunities created by Alex Rivera, our fictional demo student.">
     <Link to="/create" className="button button-primary mb-6">Create an opportunity</Link>
+    <Link to="/mentor-match" className="button button-secondary mb-6 ml-3">Find a mentor for an idea</Link>
     <OpportunityGrid opportunities={opportunities.filter(opportunity => opportunity.creator.id === demoUser.id)} />
   </PageContainer>;
 }

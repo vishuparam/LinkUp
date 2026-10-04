@@ -66,7 +66,7 @@ Keep feature-specific components inside their own feature folders. Coordinate ed
 - `src/main.tsx`: starts React and connects routing and shared demo state.
 - `src/styles.css`: Tailwind import and common form/button styling.
 
-The demo supports searching, filtering by opportunity type/field/skill, saving/unsaving, and creating an opportunity with optional questions. Changes reset on a full refresh. Profile is a read-only fictional example. Applying only shows a demo notice. Real account creation, authentication, databases, servers, Mentor Match, and LinkedIn export are intentionally outside this step. Framer Motion provides lightweight interface animation.
+The demo supports searching, filtering by opportunity type/field/skill, saving/unsaving, and creating an opportunity with optional questions. Created opportunities are saved in this browser; saves and other demo state reset on refresh. Profile is a read-only fictional example. Applying only shows a demo notice. Mentor Match uses the separate Vercel API described below and can fill its form from an idea in Your Projects. Real account creation, authentication, databases, and LinkedIn export are outside this step. Framer Motion provides lightweight interface animation.
 
 ## Packages
 
@@ -99,4 +99,4 @@ Framer Motion supplies short section reveals, card hover/press feedback, hero sc
 
 ## AI Mentor Finder backend
 
-A stateless Vercel API for evidence-based potential mentor discovery has been added. It preserves this frontend and its existing Vite development/build workflows. Setup, Gemini key handling, API request format, local testing, deployment configuration, security limits, and integration notes are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md).
+A stateless Vercel API for evidence-based potential mentor discovery powers the `/mentor-match` form through Groq and its browser search tool. Setup, API request format, local testing, deployment configuration, and security limits are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md). For local matching, put `GROQ_API_KEY` in ignored `.env.local`, export it in the terminal running `npm run dev:vercel -- --listen 3000`, and open `http://localhost:3000/mentor-match`. The Vite-only `npm run dev` server does not serve `/api/find-mentors`.

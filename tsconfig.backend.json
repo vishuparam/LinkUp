@@ -10,5 +10,6 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["api", "src/mentor", "src/gemini", "src/utils", "scripts/test-mentor-live.ts", "tests"]
+  "include": ["api", "src/mentor", "src/groq", "src/utils", "scripts/test-mentor-live.ts", "tests"],
+  "exclude": ["tests/mentor-page.test.ts"]
 }

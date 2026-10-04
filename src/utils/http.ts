@@ -26,7 +26,7 @@ export function prepareHttp(req: VercelRequest, res: VercelResponse, method: str
 export function sendError(res: VercelResponse, error: unknown, requestId: string) {
   const e = publicError(error);
   logProgress(requestId, {stage: 'error', errorCategory: e.code});
-  if (e.code === 'GEMINI_RATE_LIMITED') res.setHeader('Retry-After', '5');
+  if (e.code === 'GROQ_RATE_LIMITED') res.setHeader('Retry-After', '5');
   return res.status(e.status).json({error: {code: e.code, message: e.message, requestId}});
 }
 export function readJson(req: VercelRequest): unknown {

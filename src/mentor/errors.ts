@@ -1,4 +1,4 @@
-export type ErrorCode = 'INVALID_REQUEST' | 'METHOD_NOT_ALLOWED' | 'SERVER_CONFIGURATION_ERROR' | 'GEMINI_RATE_LIMITED' | 'GEMINI_ERROR' | 'SEARCH_TIMEOUT' | 'INTERNAL_ERROR' | 'ORIGIN_NOT_ALLOWED';
+export type ErrorCode = 'INVALID_REQUEST' | 'METHOD_NOT_ALLOWED' | 'SERVER_CONFIGURATION_ERROR' | 'GROQ_RATE_LIMITED' | 'GROQ_ERROR' | 'SEARCH_TIMEOUT' | 'INTERNAL_ERROR' | 'ORIGIN_NOT_ALLOWED';
 export class MentorError extends Error {
   constructor(public code: ErrorCode, public status: number, message: string) { super(message); }
 }

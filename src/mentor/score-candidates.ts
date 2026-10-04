@@ -1,6 +1,6 @@
 import { evaluationsSchema } from './schemas.js';
 import { prompts } from './prompts.js';
-import type { GeminiClient, LocationImportance, MatchBreakdown, MentorInput, ProjectAnalysis, ScoredCandidate, VerifiedCandidate, Candidate } from './types.js';
+import type { MentorClient, LocationImportance, MatchBreakdown, MentorInput, ProjectAnalysis, ScoredCandidate, VerifiedCandidate, Candidate } from './types.js';
 export type Weights = Record<keyof MatchBreakdown, number>;
 export function getScoringWeights(mode: LocationImportance): Weights {
   const location = {none: 0, low: 0.03, medium: 0.10, high: 0.18, in_person_required: 0.25}[mode];
@@ -16,7 +16,7 @@ const relevantFields: Record<keyof MatchBreakdown, Candidate['evidence'][number]
   skills: ['expertise'], research: ['research', 'expertise'], projectRelevance: ['research', 'expertise'],
   mentorType: ['role'], location: ['location'], preferences: ['contact', 'profile', 'email'],
 };
-export async function scoreCandidates(client: GeminiClient, candidates: VerifiedCandidate[], analysis: ProjectAnalysis, input: MentorInput, signal: AbortSignal): Promise<ScoredCandidate[]> {
+export async function scoreCandidates(client: MentorClient, candidates: VerifiedCandidate[], analysis: ProjectAnalysis, input: MentorInput, signal: AbortSignal): Promise<ScoredCandidate[]> {
   const result = evaluationsSchema.parse(await client.structured('scoring', prompts.scoring, {candidates, analysis, preferences: {mentorType: input.mentorType, compensation: input.compensation, additionalPreferences: input.additionalPreferences}}, evaluationsSchema, signal));
   const weights = getScoringWeights(analysis.locationRequirement.importance);
   const scores: ScoredCandidate[] = [];
