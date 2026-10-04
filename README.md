@@ -66,7 +66,7 @@ Keep feature-specific components inside their own feature folders. Coordinate ed
 - `src/main.tsx`: starts React and connects routing and shared demo state.
 - `src/styles.css`: Tailwind import and common form/button styling.
 
-The demo supports searching, filtering by opportunity type, saving/unsaving, and creating an opportunity. Changes reset on a full refresh. Profile is a read-only fictional example. Applying, real account creation, authentication, databases, servers, Mentor Match, and LinkedIn export are intentionally outside this step. Framer Motion has not been installed; it can be added during the animation pass.
+The demo supports searching, filtering by opportunity type/field/skill, saving/unsaving, and creating an opportunity with optional questions. Changes reset on a full refresh. Profile is a read-only fictional example. Applying only shows a demo notice. Real account creation, authentication, databases, servers, Mentor Match, and LinkedIn export are intentionally outside this step. Framer Motion provides lightweight interface animation.
 
 ## Packages
 
@@ -82,18 +82,21 @@ The demo supports searching, filtering by opportunity type, saving/unsaving, and
 
 ## Browser verification
 
-`scripts/smoke-test.mjs` clicks through all nine pages in installed Chrome at desktop (1440px) and phone (390px) widths. It checks search, type filtering, save/unsave, demo creation, page reloads, missing pages, horizontal overflow, and browser errors. It saves screenshots to ignored `test-results/`.
+`scripts/smoke-test.mjs` clicks through all nine pages in installed Chrome at desktop (1440px), tablet (768px), and phone (390px) widths. It checks combined filters, save/unsave, demo creation and questions, profile projects, demo Apply feedback, keyboard navigation, reduced motion, page reloads, missing pages, horizontal overflow, common accessibility issues, and browser errors. It saves screenshots to ignored `test-results/`.
 
 To repeat these checks with the dev server running:
 
 ```sh
-npm install --no-save --package-lock=false playwright
+npm install --no-save --package-lock=false playwright @axe-core/playwright
 node scripts/smoke-test.mjs
 ```
 
-Playwright controls a browser for testing; it is optional and is not included in the application or permanent dependencies. `public/favicon.svg` supplies the small browser-tab icon.
+Playwright controls a browser for testing and Axe checks common accessibility issues. Both are optional and are not included in the application or permanent dependencies. `public/favicon.svg` supplies the small browser-tab icon.
 
+## Visual design
+
+Framer Motion supplies short section reveals, card hover/press feedback, hero scroll movement, and mobile menu transitions. Animations honor reduced-motion preferences. Read [DESIGN-HANDOFF.md](DESIGN-HANDOFF.md) for the exact shared-file changes, animation explanations, and teammate integration notes.
 
 ## AI Mentor Finder backend
 
-A stateless Vercel API for evidence-based potential mentor discovery has been added. It preserves this frontend and its existing `npm run dev` / `npm run build` workflows. Setup, Gemini key handling, API request format, local testing, deployment configuration, security limits, and integration notes are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md).
+A stateless Vercel API for evidence-based potential mentor discovery has been added. It preserves this frontend and its existing Vite development/build workflows. Setup, Gemini key handling, API request format, local testing, deployment configuration, security limits, and integration notes are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md).

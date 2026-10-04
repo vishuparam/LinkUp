@@ -1,21 +1,97 @@
-import { NavLink, Link } from 'react-router-dom';
-
+import { useEffect, useRef, useState } from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 const links = [
-  ['/discover', 'Discover'], ['/saved', 'Saved'], ['/create', 'Create'],
-  ['/your-projects', 'Your Projects'], ['/profile', 'Profile'],
-  ['/mentor-match', 'Mentor Match'], ['/linkedin-export', 'LinkedIn Export'],
+  ["/discover", "Discover"],
+  ["/saved", "Saved"],
+  ["/your-projects", "Your Projects"],
+  ["/profile", "Profile"],
+  ["/mentor-match", "Mentor Match"],
+  ["/linkedin-export", "LinkedIn Export"],
 ];
-
 export function Navbar() {
-  return <header className="border-b border-stone-200 bg-white">
-    <div className="mx-auto max-w-6xl px-5 py-5 sm:px-8">
-      <div className="flex items-center justify-between gap-4">
-        <Link to="/" className="text-2xl font-extrabold tracking-tight text-emerald-900" aria-label="LinkUp home">LinkUp<span className="text-emerald-500">.</span></Link>
-        <span className="text-xs text-stone-500">Student ideas. Shared ambition.</span>
+  const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  const reduced = useReducedMotion();
+  const { pathname } = useLocation();
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+  useEffect(() => {
+    const media = matchMedia("(min-width: 1200px)");
+    const close = () => {
+      if (media.matches) setOpen(false);
+    };
+    media.addEventListener("change", close);
+    return () => media.removeEventListener("change", close);
+  }, []);
+  const navigation = (
+    <>
+      {links.map(([to, label]) => (
+        <NavLink
+          key={to}
+          to={to}
+          onClick={() => setOpen(false)}
+          className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+        >
+          {label}
+        </NavLink>
+      ))}
+      <NavLink
+        className="button button-primary nav-create"
+        to="/create"
+        onClick={() => setOpen(false)}
+      >
+        Create <span aria-hidden="true">↗</span>
+      </NavLink>
+    </>
+  );
+  return (
+    <header
+      className="site-header"
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          setOpen(false);
+          toggle.current?.focus();
+        }
+      }}
+    >
+      <div className="nav-inner">
+        <Link to="/" className="brand" aria-label="LinkUp home">
+          <span className="brand-symbol" aria-hidden="true">
+            ↗
+          </span>
+          LinkUp<span className="brand-dot">.</span>
+        </Link>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {navigation}
+        </nav>
+        <button
+          ref={toggle}
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen(!open)}
+        >
+          <span aria-hidden="true">{open ? "✕" : "☰"}</span>
+        </button>
       </div>
-      <nav aria-label="Main navigation" className="mt-4 flex flex-wrap gap-1">
-        {links.map(([to, label]) => <NavLink key={to} to={to} className={({ isActive }) => `rounded-lg px-3 py-2 text-sm font-medium ${isActive ? 'bg-emerald-50 text-emerald-900' : 'text-stone-600 hover:bg-stone-100'}`}>{label}</NavLink>)}
-      </nav>
-    </div>
-  </header>;
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+            className="mobile-nav"
+            initial={reduced ? false : { height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: reduced ? 0 : 0.18 }}
+          >
+            {navigation}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
+  );
 }
