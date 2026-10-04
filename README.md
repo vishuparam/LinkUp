@@ -92,3 +92,8 @@ node scripts/smoke-test.mjs
 ```
 
 Playwright controls a browser for testing; it is optional and is not included in the application or permanent dependencies. `public/favicon.svg` supplies the small browser-tab icon.
+
+
+## AI Mentor Finder backend
+
+A stateless Vercel API for evidence-based potential mentor discovery has been added. It preserves this frontend and its existing `npm run dev` / `npm run build` workflows. Setup, Gemini key handling, API request format, local testing, deployment configuration, security limits, and integration notes are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md).
