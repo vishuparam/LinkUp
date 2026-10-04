@@ -4,16 +4,19 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "node --import tsx --env-file-if-exists=.env server/index.mjs --dev",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "dev:vercel": "npx --yes vercel dev --local",
     "typecheck:backend": "tsc --noEmit -p tsconfig.backend.json",
     "test": "vitest run",
-    "mentor:test-live": "tsx --env-file-if-exists=.env.local scripts/test-mentor-live.ts"
+    "mentor:test-live": "tsx --env-file-if-exists=.env.local scripts/test-mentor-live.ts",
+    "start": "node --import tsx --env-file-if-exists=.env server/index.mjs"
   },
   "dependencies": {
+    "@google/genai": "^2.27.0",
     "framer-motion": "^14.0.0",
+    "gsap": "^3.15.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.0",

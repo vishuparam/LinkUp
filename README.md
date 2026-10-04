@@ -97,6 +97,8 @@ Playwright controls a browser for testing and Axe checks common accessibility is
 
 Framer Motion supplies short section reveals, card hover/press feedback, hero scroll movement, and mobile menu transitions. Animations honor reduced-motion preferences. Read [DESIGN-HANDOFF.md](DESIGN-HANDOFF.md) for the exact shared-file changes, animation explanations, and teammate integration notes.
 
+The landing page now has a separate cinematic Three.js network experience. Read [NETWORK-HANDOFF.md](NETWORK-HANDOFF.md) for the current landing architecture, new libraries, performance choices, and preserved team integration. Run `node scripts/test-network.mjs` with the dev server running to verify pinned scrolling, actual 3D pointer response, mobile, and fallback behavior.
+
 ## AI Mentor Finder backend
 
 A stateless Vercel API for evidence-based potential mentor discovery powers the `/mentor-match` form through Groq and its browser search tool. Setup, API request format, local testing, deployment configuration, and security limits are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md). For local matching, put `GROQ_API_KEY` in ignored `.env.local`, export it in the terminal running `npm run dev:vercel -- --listen 3000`, and open `http://localhost:3000/mentor-match`. The Vite-only `npm run dev` server does not serve `/api/find-mentors`.

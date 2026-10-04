@@ -3,7 +3,11 @@ import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
-const browser = await chromium.launch({ channel: "chrome", headless: true });
+const browser = await chromium.launch({
+  channel: "chrome",
+  headless: true,
+  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
+});
 const context = await browser.newContext();
 const page = await context.newPage();
 const errors = [];
@@ -60,14 +64,11 @@ try {
     await page.setViewportSize({ width, height: 950 });
     await page.goto(base);
     await page.getByRole("heading", { level: 1 }).waitFor();
+    await page.waitForTimeout(1200);
     await audit("Landing " + width);
     await noOverflow();
     // Visit each section: jumping to the bottom skips the scroll reveals.
-    for (const selector of [
-      ".story-section",
-      ".steps-section",
-      ".featured-section",
-    ]) {
+    for (const selector of [".product-reveal"]) {
       await page.locator(selector).scrollIntoViewIfNeeded();
       await page.waitForTimeout(650);
       await audit("Landing section " + selector + " " + width);
@@ -150,7 +151,7 @@ try {
       path: "test-results/details-" + width + ".png",
       fullPage: true,
     });
-    await page.getByRole("button", { name: "Saved ✓" }).click();
+    await page.getByRole("button", { name: /^Saved/ }).click();
     await nav("Saved");
     await page.getByText("Nothing saved yet.").waitFor();
     await nav("Create");
@@ -219,30 +220,16 @@ try {
   }
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base);
-  await page.locator(".floating-card").first().waitFor();
-  await page.waitForTimeout(100);
-  assert(
-    await page
-      .locator(".floating-card")
-      .first()
-      .evaluate((node) =>
-        ["none", "matrix(1, 0, 0, 1, 0, 0)"].includes(
-          getComputedStyle(node).transform,
-        ),
-      ),
-    "Reduced motion card rotation disabled",
+  await page.locator(".portal-poster").waitFor();
+  assert.equal(
+    await page.locator(".portal-media video").count(),
+    0,
+    "Reduced motion uses static portal",
   );
-  await page.setViewportSize({ width: 1440, height: 950 });
-  await page.evaluate(() => scrollTo(0, 350));
-  assert(
-    await page
-      .locator(".hero-cards")
-      .evaluate((node) =>
-        ["none", "matrix(1, 0, 0, 1, 0, 0)"].includes(
-          getComputedStyle(node).transform,
-        ),
-      ),
-    "Reduced motion parallax disabled",
+  assert.equal(
+    await page.locator(".pin-spacer").count(),
+    0,
+    "Reduced motion has no pinned scroll sequence",
   );
   await page.goto(base + "/discover");
   await page.keyboard.press("Tab");
