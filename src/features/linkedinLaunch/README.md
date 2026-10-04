@@ -1,27 +1,20 @@
-# LinkedIn Launch
+﻿# LinkedIn Launch — local demo flow
 
-The existing `/linkedin-export` route renders this feature inside LinkUp's shared layout. `LinkedInExport.tsx` lists only opportunities created by the current `User`. It snapshots the selected IDs when the user clicks **Generate profile kit**, maps only those opportunities with `adaptLinkUpData`, and sends the normalized payload to `POST /api/linkedin-launch/generate`. The separate **Full example** tab is an explicitly fictional fixture; it is never mixed into the current user's export.
+The `/linkedin-export` page now renders `LocalLinkedInLaunch.tsx`. It uses only `templates.ts`; there is no generation request, AI provider, scraping, key, or server dependency.
 
-## Actual data and privacy
+## Where to edit
+- `templates.ts`: 10 interest categories, their headlines/About/first-post templates, 30 project ideas (exactly three per interest), project descriptions and skill choices. `buildLocalProfileKit` inserts selected project/field/skills into predefined text and returns the existing `LinkedInProfileKit` shape.
+- `LocalLinkedInLaunch.tsx`: interest select → skill chips → one project → Generate → 2.1-second local loading transition → five-section kit. Changing selections clears the previous draft. Copy buttons reuse the existing `copyText` and `sectionText` helpers. Copy All contains only Headline, About, Featured Project, Skills and Suggested First Post. Feedback lasts 1.8 seconds, and clipboard failure offers manual copying.
+- `localLaunch.css`: isolated compact styling, responsive project cards, visible keyboard focus and reduced motion. Reduced motion stops the pulsing dots and entrance movement; the short loading messages still display.
+- `src/pages/LinkedInExport.tsx`: thin route wrapper using the existing page layout; URL and navigation are unchanged.
 
-LinkUp currently stores a user's name, grade, bio, interests, and skills, plus in-memory opportunities with type, field, short/full descriptions, creator, location, requested teammate skills and roles. It has no stored school, career goals, verified completed-work status, awards, experience, mentors, authentication, or database. The optional one-time goal entered on this page is not saved to LinkUp. Opportunity listings are treated as ideas; requested teammate skills and roles are not attributed to the student.
+Suggestions are project ideas, not the student's completed work. Generated text uses planning/exploring language and never invents employment, awards, companies, impact or mentorship. Skills reflect only selected supported options; recommended project skills remain editable template metadata and are not automatically claimed.
 
-The browser's normalizer and the server's whitelist pass only name, grade when present, bio, interests, the one-time goal, listed skills, selected project facts, and optional verified experience/honors and mentors marked `shareInExport: true`. Contact details, credentials, hidden mentor records, and unrelated object keys are removed. No profile payload is logged. Once LinkUp has authentication and persisted profile data, the server must verify ownership and add rate limits before public deployment.
+## Preserved older work
+The older `LinkedInLaunch`, adapter, generic generator, API client, source types and server/API files are retained for compatibility and their existing tests. They are not imported by the current page's generation flow. Mentor Match and shared infrastructure were not changed. The new flow does not export actual LinkUp project history or mentor data; it is deliberately a guided project-idea/template demo.
 
-## AI and fallback
+## Checks
+`npm run build`, `npm test`, `npm run typecheck:backend`, and `node scripts/test-local-linkedin.mjs`.
+The browser script blocks APIs and tests Engineering → Chemistry regeneration, project changes, skills, all ten suggestion sets, the three loading messages, all five copy controls, Copy All, clipboard failure, mobile overflow, accessibility and reduced motion. Screenshots go into ignored `test-results/`.
 
-The Node server in `server/` calls Groq Chat Completions with strict JSON Schema output on `openai/gpt-oss-20b`. The provider writes headline, About, suggested post, and descriptions for exactly the supplied projects and experiences. The server retains factual titles, dates, links, awards, skills, and shareable mentor details from sanitized input. It rejects mismatched project IDs, unsupported skills, introduced numbers, and several unsupported claim words. These checks reduce risk but cannot prove every sentence true; students should review the kit before copying it.
-
-If the API key is missing, the provider fails, or the model output is malformed, the browser uses `generateLinkedInProfile` on the same selected LinkUp data. Copy by section, Copy all, and Open LinkedIn remain manual. Nothing is posted to LinkedIn automatically.
-
-## Local setup
-
-1. Run `npm ci`.
-2. Copy `.env.example` to `.env` in the LinkUp root.
-3. Put a real key only in the ignored `.env`: `GROQ_API_KEY=your_key_here`. Never use `VITE_GROQ_API_KEY` or commit `.env`.
-4. Optionally change `GROQ_MODEL`; its default is `openai/gpt-oss-20b`.
-5. Run `npm run dev`, then open `http://127.0.0.1:5173/linkedin-export`.
-
-Without a key, generation still works through the fallback. `npm run build` type-checks and bundles the client. For a built app, run `npm run start` after building; `npm run preview` serves only Vite's static output, so AI requests there fall back. The server and provider use Node's built-in HTTP/fetch APIs, so no new SDK package is required.
-
-The existing feature tests are in `tests/linkedinLaunch.test.ts`; the server tests are in `tests/linkedinApi.test.mjs`. All provider tests use mocks and spend no API credits. A future authenticated app can pass a real `User` to `<LinkedInExport user={currentUser} />` and shareable Mentor Match records as `mentors` without changing Mentor Match itself.
+No new packages are required. Existing API tests use mocks; no live provider calls or API credits are needed.

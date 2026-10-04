@@ -124,13 +124,15 @@ test('feature renders profile sections and manual transfer controls', () => {
   assert.match(html, /href="https:\/\/www.linkedin.com\/"/);
 });
 
-test('export page exposes selectable LinkUp ideas and a Generate action', () => {
+test('export page offers a local guided flow without old AI/example controls', () => {
   const html = renderToStaticMarkup(createElement(DemoProvider, null, createElement(LinkedInExport)));
-  assert.match(html, /Choose ideas to include/);
-  assert.match(html, /Generate profile kit/);
-  assert.match(html, /Sprout Map/);
-  assert.match(html, /Neighbor Notes/);
-  assert.doesNotMatch(html, /Pocket Science/);
+  assert.match(html, /What are you interested in/);
+  assert.match(html, /Generate LinkedIn Profile/);
+  assert.match(html, /Software Development/);
+  assert.match(html, /Chemistry/);
+  assert.match(html, /Local templates. No AI service/);
+  assert.doesNotMatch(html, /Choose ideas to include|Full example|AI-written|AI generation is unavailable/);
+  assert.doesNotMatch(html, /Honors &amp; Awards|Volunteering|Mentorship &amp; Learning/);
 });
 
 test('different selected LinkUp projects produce distinct, specific export content', () => {

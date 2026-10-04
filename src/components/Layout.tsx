@@ -41,7 +41,7 @@ export function Layout() {
         </Link>
         <p>Less waiting. More making.</p>
         <span>
-          Frontend demo · All sample people and opportunities are fictional.
+          Frontend demo · Student profiles and opportunities are fictional. Mentor profiles reference real professionals.
         </span>
       </footer>
     </div>
