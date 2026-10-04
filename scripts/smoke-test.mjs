@@ -213,6 +213,9 @@ try {
     await nav("Discover");
     await cards(6);
     await page.reload();
+    await cards(6); // Main preserves created ideas across refreshes.
+    await page.evaluate(() => localStorage.removeItem("linkup-created-opportunities-v1"));
+    await page.reload();
     await cards(5);
     await page.waitForTimeout(300);
     await page.screenshot({

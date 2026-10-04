@@ -12,7 +12,7 @@ export type VerifiedCandidate = Candidate & {verificationStatus: 'verified' | 'p
 export type ScoredCandidate = VerifiedCandidate & {matchScore: number; matchBreakdown: MatchBreakdown; locationCompatibility: 'compatible' | 'incompatible' | 'uncertain'};
 export type Grounding = {sources: {url: string; title: string | null}[]; searchQueries: string[]; citations: {id: string; url: string; text: string; start: number | null; end: number | null}[]; searchSuggestions: string[]};
 export type Research = {text: string; grounding: Grounding};
-export interface GeminiClient {
+export interface MentorClient {
   structured<T>(stage: string, instruction: string, data: unknown, schema: z.ZodType<T>, signal: AbortSignal): Promise<T>;
   research(stage: string, instruction: string, data: unknown, signal: AbortSignal): Promise<Research>;
 }

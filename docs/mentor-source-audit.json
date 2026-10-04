@@ -1,0 +1,688 @@
+[
+  {
+    "name": "Hal Abelson",
+    "sourceUrl": "https://www.eecs.mit.edu/people/hal-abelson/",
+    "profileUrl": "https://www.eecs.mit.edu/people/hal-abelson/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Elfar Adalsteinsson",
+    "sourceUrl": "https://www.eecs.mit.edu/people/elfar-adalsteinsson/",
+    "profileUrl": "https://www.eecs.mit.edu/people/elfar-adalsteinsson/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Anant Agarwal",
+    "sourceUrl": "https://www.eecs.mit.edu/people/anant-agarwal/",
+    "profileUrl": "https://www.eecs.mit.edu/people/anant-agarwal/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Pulkit Agrawal",
+    "sourceUrl": "https://www.eecs.mit.edu/people/pulkit-agrawal/",
+    "profileUrl": "https://www.eecs.mit.edu/people/pulkit-agrawal/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Regina Barzilay",
+    "sourceUrl": "https://www.eecs.mit.edu/people/regina-barzilay/",
+    "profileUrl": "https://www.eecs.mit.edu/people/regina-barzilay/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Sara Beery",
+    "sourceUrl": "https://www.eecs.mit.edu/people/sara-beery/",
+    "profileUrl": "https://www.eecs.mit.edu/people/sara-beery/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Sangeeta Bhatia",
+    "sourceUrl": "https://www.eecs.mit.edu/people/sangeeta-bhatia/",
+    "profileUrl": "https://www.eecs.mit.edu/people/sangeeta-bhatia/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Michael Carbin",
+    "sourceUrl": "https://www.eecs.mit.edu/people/michael-carbin/",
+    "profileUrl": "https://www.eecs.mit.edu/people/michael-carbin/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "YuFeng (Kevin)  Chen",
+    "sourceUrl": "https://www.eecs.mit.edu/people/yufeng-kevin-chen/",
+    "profileUrl": "https://www.eecs.mit.edu/people/yufeng-kevin-chen/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Connor Wilson Coley",
+    "sourceUrl": "https://www.eecs.mit.edu/people/connor-wilson-coley/",
+    "profileUrl": "https://www.eecs.mit.edu/people/connor-wilson-coley/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Henry Corrigan-Gibbs",
+    "sourceUrl": "https://www.eecs.mit.edu/people/henry-corrigan-gibbs/",
+    "profileUrl": "https://www.eecs.mit.edu/people/henry-corrigan-gibbs/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Christina Delimitrou",
+    "sourceUrl": "https://www.eecs.mit.edu/people/christina-delimitrou/",
+    "profileUrl": "https://www.eecs.mit.edu/people/christina-delimitrou/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Erik Demaine",
+    "sourceUrl": "https://www.eecs.mit.edu/people/erik-demaine/",
+    "profileUrl": "https://www.eecs.mit.edu/people/erik-demaine/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Srini Devadas",
+    "sourceUrl": "https://www.eecs.mit.edu/people/srini-devadas/",
+    "profileUrl": "https://www.eecs.mit.edu/people/srini-devadas/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Priya Donti",
+    "sourceUrl": "https://www.eecs.mit.edu/people/priya-donti/",
+    "profileUrl": "https://www.eecs.mit.edu/people/priya-donti/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Marzyeh Ghassemi",
+    "sourceUrl": "https://www.eecs.mit.edu/people/marzyeh-ghassemi/",
+    "profileUrl": "https://www.eecs.mit.edu/people/marzyeh-ghassemi/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Polina Golland",
+    "sourceUrl": "https://www.eecs.mit.edu/people/polina-golland/",
+    "profileUrl": "https://www.eecs.mit.edu/people/polina-golland/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Dina Katabi",
+    "sourceUrl": "https://www.eecs.mit.edu/people/dina-katabi/",
+    "profileUrl": "https://www.eecs.mit.edu/people/dina-katabi/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Manolis Kellis",
+    "sourceUrl": "https://www.eecs.mit.edu/people/manolis-kellis/",
+    "profileUrl": "https://www.eecs.mit.edu/people/manolis-kellis/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Kaiming He",
+    "sourceUrl": "https://www.eecs.mit.edu/people/kaiming-he/",
+    "profileUrl": "https://www.eecs.mit.edu/people/kaiming-he/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "John Guttag",
+    "sourceUrl": "https://www.eecs.mit.edu/people/john-guttag/",
+    "profileUrl": "https://www.eecs.mit.edu/people/john-guttag/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Daniel Jackson",
+    "sourceUrl": "https://www.eecs.mit.edu/people/daniel-jackson/",
+    "profileUrl": "https://www.eecs.mit.edu/people/daniel-jackson/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Leslie Kaelbling",
+    "sourceUrl": "https://www.eecs.mit.edu/people/leslie-kaelbling/",
+    "profileUrl": "https://www.eecs.mit.edu/people/leslie-kaelbling/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Tim Kraska",
+    "sourceUrl": "https://www.eecs.mit.edu/people/tim-kraska/",
+    "profileUrl": "https://www.eecs.mit.edu/people/tim-kraska/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Daniela Rus",
+    "sourceUrl": "https://www.eecs.mit.edu/people/daniela-rus/",
+    "profileUrl": "https://www.eecs.mit.edu/people/daniela-rus/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Ronald Rivest",
+    "sourceUrl": "https://www.eecs.mit.edu/people/ronald-rivest/",
+    "profileUrl": "https://www.eecs.mit.edu/people/ronald-rivest/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Armando Solar-Lezama",
+    "sourceUrl": "https://www.eecs.mit.edu/people/armando-solar-lezama/",
+    "profileUrl": "https://www.eecs.mit.edu/people/armando-solar-lezama/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Mina Konakovic Lukovic",
+    "sourceUrl": "https://www.eecs.mit.edu/people/mina-konakovic-lukovic/",
+    "profileUrl": "https://www.eecs.mit.edu/people/mina-konakovic-lukovic/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Mitchell Gordon",
+    "sourceUrl": "https://www.eecs.mit.edu/people/mitchell-gordon/",
+    "profileUrl": "https://www.eecs.mit.edu/people/mitchell-gordon/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Justin Yim",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/jkyim",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/jkyim",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Kris Hauser",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/kkhauser",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/kkhauser",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Girish Krishnan",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/gkrishna",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/gkrishna",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Marianne Alleyne",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/vanlaarh",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/vanlaarh",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Rashid Bashir",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/rbashir",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/rbashir",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Rohit Bhargava",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/rxb",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/rxb",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Paul V. Braun",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/pbraun",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/pbraun",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "David Cahill",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/d-cahill",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/d-cahill",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Lili Cai",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/lilicai",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/lilicai",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Elif Ertekin",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/ertekin",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/ertekin",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Mattia Gazzola",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/mgazzola",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/mgazzola",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Molly Hathaway Goldstein",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/mhg3",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/mhg3",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Bumsoo Han",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/bumsooh",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/bumsooh",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Naira Hovakimyan",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/nhovakim",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/nhovakim",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Elizabeth T Hsiao-Wecksler",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/ethw",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/ethw",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Mariana E. Kersh",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/mkersh",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/mkersh",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Joohyung Kim",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/joohyung",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/joohyung",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Paul J.A. Kenis",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/kenis",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/kenis",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Nenad Miljkovic",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/nmiljkov",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/nmiljkov",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Kyle Smith",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/kcsmith",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/kcsmith",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Amy Wagoner Johnson",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/ajwj",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/ajwj",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Ning Wang",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/nwangrw",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/nwangrw",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Yuanhui Zhang",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/yzhang1",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/yzhang1",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Xinlei Wang",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/xwang2",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/xwang2",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Wenzhen Yuan",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/yuanwz",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/yuanwz",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Bill Aulet",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/bill-aulet",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/bill-aulet",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Fiona E. Murray",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/fiona-e-murray",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/fiona-e-murray",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Pierre Azoulay",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/pierre-azoulay",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/pierre-azoulay",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Andrew W. Lo",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/andrew-w-lo",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/andrew-w-lo",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Catherine Wolfram",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/catherine-wolfram",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/catherine-wolfram",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Roberto Rigobon",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/roberto-rigobon",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/roberto-rigobon",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Antoinette Schoar",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/antoinette-schoar",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/antoinette-schoar",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Simon Johnson",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/simon-johnson",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/simon-johnson",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Deborah J. Lucas",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/deborah-j-lucas",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/deborah-j-lucas",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Christian Catalini",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/christian-catalini",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/christian-catalini",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Sandy Pentland",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/sandy-pentland",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/sandy-pentland",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Eric Arthur von Hippel",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/eric-arthur-von-hippel",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/eric-arthur-von-hippel",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Sinan Aral",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/sinan-aral",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/sinan-aral",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Deborah L. Ancona",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/deborah-l-ancona",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/deborah-l-ancona",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Roberto Fernandez",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/roberto-fernandez",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/roberto-fernandez",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Renee Richardson Gosline",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/renee-richardson-gosline",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/renee-richardson-gosline",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Y. Karen Zheng",
+    "sourceUrl": "https://mitsloan.mit.edu/faculty/directory/y-karen-zheng",
+    "profileUrl": "https://mitsloan.mit.edu/faculty/directory/y-karen-zheng",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Lydia Bourouiba",
+    "sourceUrl": "https://cee.mit.edu/people_individual/lydia-bourouiba/",
+    "profileUrl": "https://cee.mit.edu/people_individual/lydia-bourouiba/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Markus J. Buehler",
+    "sourceUrl": "https://cee.mit.edu/people_individual/markus-j-buehler/",
+    "profileUrl": "https://cee.mit.edu/people_individual/markus-j-buehler/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Penny Chisholm",
+    "sourceUrl": "https://cee.mit.edu/people_individual/penny-chisholm/",
+    "profileUrl": "https://cee.mit.edu/people_individual/penny-chisholm/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Elfatih Eltahir",
+    "sourceUrl": "https://cee.mit.edu/people_individual/elfatih-eltahir/",
+    "profileUrl": "https://cee.mit.edu/people_individual/elfatih-eltahir/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Dara Entekhabi",
+    "sourceUrl": "https://cee.mit.edu/people_individual/dara-entekhabi/",
+    "profileUrl": "https://cee.mit.edu/people_individual/dara-entekhabi/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Haruko Murakami Wainwright",
+    "sourceUrl": "https://cee.mit.edu/people_individual/haruko-murakami-wainwright/",
+    "profileUrl": "https://cee.mit.edu/people_individual/haruko-murakami-wainwright/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Darcy McRose",
+    "sourceUrl": "https://cee.mit.edu/people_individual/darcy-mcrose/",
+    "profileUrl": "https://cee.mit.edu/people_individual/darcy-mcrose/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Andrew Whittle",
+    "sourceUrl": "https://cee.mit.edu/people_individual/andrew-whittle/",
+    "profileUrl": "https://cee.mit.edu/people_individual/andrew-whittle/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Carolyn Bertozzi",
+    "sourceUrl": "https://profiles.stanford.edu/carolyn-bertozzi",
+    "profileUrl": "https://profiles.stanford.edu/carolyn-bertozzi",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Manu Prakash",
+    "sourceUrl": "https://profiles.stanford.edu/manu-prakash",
+    "profileUrl": "https://profiles.stanford.edu/manu-prakash",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Michelle Monje",
+    "sourceUrl": "https://profiles.stanford.edu/michelle-monje-deisseroth",
+    "profileUrl": "https://profiles.stanford.edu/michelle-monje-deisseroth",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Sergiu\u00a0P. Pasca",
+    "sourceUrl": "https://profiles.stanford.edu/sergiu-pasca",
+    "profileUrl": "https://profiles.stanford.edu/sergiu-pasca",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Steven Goodman",
+    "sourceUrl": "https://profiles.stanford.edu/steven-goodman",
+    "profileUrl": "https://profiles.stanford.edu/steven-goodman",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Russ B. Altman",
+    "sourceUrl": "https://profiles.stanford.edu/russ-altman",
+    "profileUrl": "https://profiles.stanford.edu/russ-altman",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Victor R. Lee",
+    "sourceUrl": "https://profiles.stanford.edu/victorlee",
+    "profileUrl": "https://profiles.stanford.edu/victorlee",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Linda Darling-Hammond",
+    "sourceUrl": "https://profiles.stanford.edu/linda-darling-hammond",
+    "profileUrl": "https://profiles.stanford.edu/linda-darling-hammond",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Jeremy Bailenson",
+    "sourceUrl": "https://profiles.stanford.edu/jeremy-bailenson",
+    "profileUrl": "https://profiles.stanford.edu/jeremy-bailenson",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Andrew G Alleyne",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/alleyne",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/alleyne",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Carolyn L Beck",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/beck3",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/beck3",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Leonardo Chamorro",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/lpchamo",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/lpchamo",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Randy H Ewoldt",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/ewoldt",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/ewoldt",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Shelby Hutchens",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/hutchs",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/hutchs",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Iwona M Jasiuk",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/ijasiuk",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/ijasiuk",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Chenhui Shao",
+    "sourceUrl": "https://mechse.illinois.edu/people/profile/chshao",
+    "profileUrl": "https://mechse.illinois.edu/people/profile/chshao",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Jensen Huang",
+    "sourceUrl": "https://www.nvidia.com/en-us/about-nvidia/board-of-directors/jensen-huang/",
+    "profileUrl": "https://www.nvidia.com/en-us/about-nvidia/board-of-directors/jensen-huang/",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Lisa Su",
+    "sourceUrl": "https://www.amd.com/en/corporate/leadership/lisa-su.html",
+    "profileUrl": "https://www.amd.com/en/corporate/leadership/lisa-su.html",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  },
+  {
+    "name": "Thomas Byers",
+    "sourceUrl": "https://profiles.stanford.edu/thomas-byers",
+    "profileUrl": "https://profiles.stanford.edu/thomas-byers",
+    "httpStatus": 200,
+    "checkedOn": "2026-10-04"
+  }
+]

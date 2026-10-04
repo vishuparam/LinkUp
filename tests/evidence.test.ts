@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest';
 import { deduplicateCandidates } from '../src/mentor/deduplicate.js';
 import { enforceEvidence } from '../src/mentor/verify-candidates.js';
-import { extractGroundingSources } from '../src/mentor/grounding.js';
+import { extractGroqGrounding } from '../src/groq/grounding.js';
 import { fixtureCandidate } from './fixtures.js';
 it('merges same person with evidence from multiple pages', () => {
   const a = fixtureCandidate(); const b = fixtureCandidate('Dr. Jane Doe', 2);
@@ -27,10 +27,26 @@ it.each(['uncited', 'weak', 'contradicted', 'no-route', 'unsupported-person'])('
   expect(enforceEvidence(f.candidate, f.grounding)).toBeNull();
 });
 it('rejects contact brokers even if labelled university', () => { const f = fixtureCandidate(); f.candidate.evidence.forEach(e => e.sourceUrl = 'https://rocketreach.co/person'); f.grounding.citations.forEach(c => c.url = 'https://rocketreach.co/person'); expect(enforceEvidence(f.candidate, f.grounding)).toBeNull(); });
-it('handles missing metadata and rejects prose URLs', () => expect(extractGroundingSources({output_text: 'https://madeup.edu'}).sources).toEqual([]));
-it('extracts actual Interactions annotations using byte offsets', () => {
-  const text = 'Élodie studies retinal imaging.'; const url = 'https://university.edu/elodie';
-  const result = extractGroundingSources({steps: [{type: 'google_search_call', arguments: {queries: ['retinal imaging']}}, {type: 'model_output', content: [{type: 'text', text, annotations: [{type: 'url_citation', url, title: 'Faculty', start_index: 0, end_index: Buffer.byteLength(text)}]}]}]});
-  expect(result.citations[0]!.text).toBe(text); expect(result.searchQueries).toEqual(['retinal imaging']);
+it('handles missing metadata and rejects prose URLs', () => expect(extractGroqGrounding({output_text: 'https://madeup.edu'}).sources).toEqual([]));
+it('resolves Groq line citations to text returned by browser.open', () => {
+  const url = 'https://university.edu/elodie';
+  const result = extractGroqGrounding({output: [
+    {type: 'mcp_call', name: 'browser.search', status: 'completed', arguments: '{"query":"retinal imaging researcher"}'},
+    {type: 'mcp_call', name: 'browser.open', status: 'completed', output: `L0: \nL1: URL: ${url}\nL2: Élodie studies retinal imaging.\nL3: Professional profile`},
+    {type: 'message', content: [{type: 'output_text', text: 'Élodie studies retinal imaging【1†L2-L3】', annotations: []}]},
+  ]});
+  expect(result.citations[0]!.text).toBe('Élodie studies retinal imaging. Professional profile');
+  expect(result.sources[0]!.url).toBe(url);
+  expect(result.searchQueries).toEqual(['retinal imaging researcher']);
 });
-it('does not use full response when citation offsets are missing', () => { const g = extractGroundingSources({outputs: [{type: 'text', text: 'Uncited email', annotations: [{type: 'url_citation', url: 'https://university.edu'}]}]}); expect(g.citations[0]!.text).toBe(''); });
+it('rejects line citations without a completed opened page', () => {
+  const result = extractGroqGrounding({output: [{type: 'message', content: [{type: 'output_text', text: 'Uncited email【1†L2-L3】'}]}]});
+  expect(result.citations).toEqual([]);
+});
+it('accepts a single-line Groq citation only when its opened line exists', () => {
+  const result = extractGroqGrounding({output: [
+    {type: 'mcp_call', name: 'browser.open', status: 'completed', output: 'L1: URL: https://university.edu/person\nL2: Jane Doe studies retinal imaging.'},
+    {type: 'message', content: [{type: 'output_text', text: 'Jane Doe studies retinal imaging【0†L2】 Missing【0†L8】'}]},
+  ]});
+  expect(result.citations.map(c => c.text)).toEqual(['Jane Doe studies retinal imaging.']);
+});

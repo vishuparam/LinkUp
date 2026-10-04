@@ -1,8 +1,8 @@
 import { explanationsSchema } from './schemas.js';
 import { prompts } from './prompts.js';
-import type { GeminiClient, ProjectAnalysis, ScoredCandidate } from './types.js';
+import type { MentorClient, ProjectAnalysis, ScoredCandidate } from './types.js';
 import { MentorError } from './errors.js';
-export async function generateExplanations(client: GeminiClient, candidates: ScoredCandidate[], analysis: ProjectAnalysis, signal: AbortSignal) {
+export async function generateExplanations(client: MentorClient, candidates: ScoredCandidate[], analysis: ProjectAnalysis, signal: AbortSignal) {
   const options = candidates.map(c => ({id: c.id, statements: [
     {id: 'skills', text: `Potential mentor with verified expertise in ${c.expertise.join(', ')}.`},
     {id: 'research', text: `Verified research areas include ${c.researchAreas.join(', ')}.`},
@@ -12,7 +12,7 @@ export async function generateExplanations(client: GeminiClient, candidates: Sco
   return candidates.map((c, i) => {
     const choices = result.explanations.filter(e => e.id === c.id);
     const statements = options.find(o => o.id === c.id)!.statements;
-    if (choices.length !== 1 || choices[0]!.statementIds.some(id => !statements.some(s => s.id === id))) throw new MentorError('GEMINI_ERROR', 502, 'Gemini returned unsupported explanation references.');
+    if (choices.length !== 1 || choices[0]!.statementIds.some(id => !statements.some(s => s.id === id))) throw new MentorError('GROQ_ERROR', 502, 'Groq returned unsupported explanation references.');
     const whyMatch = [...new Set(choices[0]!.statementIds)].map(id => statements.find(s => s.id === id)!.text).join(' ');
     const limitations = ['This is a potential match; availability and willingness to mentor have not been confirmed.'];
     if (!c.publicEmail) limitations.push('A public professional email could not be verified. Use the professional profile/contact page.');

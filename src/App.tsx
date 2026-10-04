@@ -10,7 +10,7 @@ import { Create } from "./pages/Create";
 import { YourProjects } from "./pages/YourProjects";
 import { Profile } from "./pages/Profile";
 import { ProjectDetails } from "./pages/ProjectDetails";
-import { MentorMatch } from "./pages/MentorMatch";
+const MentorMatch = lazy(() => import("./pages/MentorMatch").then(module => ({ default: module.MentorMatch })));
 import { LinkedInExport } from "./pages/LinkedInExport";
 import { NotFound } from "./pages/NotFound";
 
@@ -45,7 +45,7 @@ export function App() {
         <Route path="your-projects" element={<YourProjects />} />
         <Route path="profile" element={<Profile />} />
         <Route path="projects/:id" element={<ProjectDetails />} />
-        <Route path="mentor-match" element={<MentorMatch />} />
+        <Route path="mentor-match" element={<Suspense fallback={<p role="status">Loading mentor directory?</p>}><MentorMatch /></Suspense>} />
         <Route path="linkedin-export" element={<LinkedInExport />} />
         <Route path="*" element={<NotFound />} />
       </Route>

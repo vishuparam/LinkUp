@@ -4,6 +4,7 @@ import { PageContainer } from "../components/PageContainer";
 import { Button } from "../components/Button";
 import { Tag } from "../components/Tag";
 import { useDemo } from "../context/DemoContext";
+import { demoUser } from "../data/demo";
 export function ProjectDetails() {
   const { id } = useParams();
   const { opportunities, savedIds, toggleSaved } = useDemo();
@@ -113,6 +114,7 @@ export function ProjectDetails() {
           >
             {saved ? "Saved" : "Save opportunity"}
           </Button>
+          {item.creator.id === demoUser.id && <Link className="button button-secondary" to={`/mentor-match?projectId=${encodeURIComponent(item.id)}`}>Find a mentor for this idea</Link>}
           <p
             id="application-note"
             className="text-xs leading-relaxed text-stone-500"

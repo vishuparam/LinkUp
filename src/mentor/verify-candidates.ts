@@ -3,7 +3,7 @@ import { prompts } from './prompts.js';
 import { deduplicateCandidates } from './deduplicate.js';
 import { sourceQuality, isOfficial } from './source-quality.js';
 import { normalize, safeUrl } from '../utils/normalize.js';
-import type { Candidate, GeminiClient, Grounding, ProjectAnalysis, VerifiedCandidate } from './types.js';
+import type { Candidate, MentorClient, Grounding, ProjectAnalysis, VerifiedCandidate } from './types.js';
 /** Fail closed: the second search must support every exposed field with cited text. */
 export function enforceEvidence(candidate: Candidate, grounding: Grounding): VerifiedCandidate | null {
   if (candidate.contradictions.length) return null;
@@ -44,7 +44,7 @@ export function enforceEvidence(candidate: Candidate, grounding: Grounding): Ver
     contactStatus: publicEmail ? 'public_email' : contactEvidence && isOfficial(contactEvidence) ? 'official_contact_page' : profileEvidence && isOfficial(profileEvidence) ? 'official_profile_only' : 'professional_profile_only',
   };
 }
-export async function verifyCandidates(client: GeminiClient, candidates: Candidate[], analysis: ProjectAnalysis, signal: AbortSignal) {
+export async function verifyCandidates(client: MentorClient, candidates: Candidate[], analysis: ProjectAnalysis, signal: AbortSignal) {
   const research = await client.research('verification', prompts.verification, {candidates: candidates.map(c => ({id: c.id, name: c.name, organization: c.organization, profileUrl: c.profileUrl})), analysis}, signal);
   if (!research.grounding.citations.some(c => c.text)) return {candidates: [], research};
   const extracted = candidatesSchema.parse(await client.structured('verification-extraction', prompts.extraction, {research, allowedIdentities: candidates.map(c => ({id: c.id, name: c.name}))}, candidatesSchema, signal));

@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { inputSchema } from './schemas.js';
 import { getConfig, type Config } from './config.js';
-import { createGeminiClient } from '../gemini/client.js';
+import { createGroqClient } from '../groq/client.js';
 import { analyzeProject } from './analyze-project.js';
 import { generateSearchPlan } from './search-plan.js';
 import { discoverCandidates } from './discover-candidates.js';
@@ -12,14 +12,14 @@ import { generateExplanations } from './generate-explanations.js';
 import { MentorError, timeoutError } from './errors.js';
 import { logProgress, type Progress } from '../utils/logger.js';
 import { unique } from '../utils/normalize.js';
-import type { GeminiClient, Grounding } from './types.js';
-export type EngineOptions = {client?: GeminiClient; config?: Config; requestId?: string; signal?: AbortSignal; onProgress?: (event: Progress) => void};
+import type { MentorClient, Grounding } from './types.js';
+export type EngineOptions = {client?: MentorClient; config?: Config; requestId?: string; signal?: AbortSignal; onProgress?: (event: Progress) => void};
 export async function findMentors(raw: unknown, options: EngineOptions = {}) {
   const parsed = inputSchema.safeParse(raw);
   if (!parsed.success) throw new MentorError('INVALID_REQUEST', 400, 'Invalid project input. Check required fields and limits.');
   const input = parsed.data;
   const config = options.config ?? getConfig();
-  const client = options.client ?? createGeminiClient(config);
+  const client = options.client ?? createGroqClient(config);
   const requestId = options.requestId ?? randomUUID();
   const controller = new AbortController();
   const abort = () => controller.abort();
@@ -33,9 +33,15 @@ export async function findMentors(raw: unknown, options: EngineOptions = {}) {
   const run = async () => {
     const stage = async <T>(name: string, fn: () => Promise<T>): Promise<T> => {
       if (signal.aborted) throw timeoutError();
-      notify({stage: name}); const started = Date.now(); const value = await fn();
-      if (signal.aborted) throw timeoutError();
-      notify({stage: name, durationMs: Date.now() - started}); return value;
+      notify({stage: name}); const started = Date.now();
+      try {
+        const value = await fn();
+        if (signal.aborted) throw timeoutError();
+        notify({stage: name, durationMs: Date.now() - started}); return value;
+      } catch (error) {
+        notify({stage: name, durationMs: Date.now() - started, errorCategory: error instanceof MentorError ? error.code : 'INTERNAL_ERROR'});
+        throw error;
+      }
     };
     const analysis = await stage('analysis', () => analyzeProject(client, input, signal));
     const plan = await stage('plan', () => generateSearchPlan(client, analysis, signal));

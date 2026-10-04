@@ -907,6 +907,111 @@ input[type="checkbox"] {
   color: #56634d;
   line-height: 1.8;
 }
+.mentor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr);
+  align-items: start;
+  gap: 28px;
+}
+.mentor-field-hint {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.mentor-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-size: 14px;
+}
+.mentor-message {
+  margin: 22px 0;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #edf3e8;
+  line-height: 1.6;
+}
+.mentor-error {
+  border-color: #e6c5bd;
+  background: #fff0eb;
+  color: #813728;
+}
+.mentor-results {
+  margin-top: 34px;
+}
+.mentor-results > h2 {
+  margin-bottom: 18px;
+  font-size: 28px;
+  letter-spacing: -0.8px;
+}
+.mentor-cards {
+  display: grid;
+  gap: 18px;
+}
+.mentor-card-heading,
+.mentor-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.mentor-card-heading h3 {
+  margin: 8px 0 4px;
+  font-size: 24px;
+  letter-spacing: -0.6px;
+}
+.mentor-card-heading p,
+.mentor-card > p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+.mentor-score {
+  border-radius: 20px;
+  padding: 8px 12px;
+  background: #e4f2d0;
+  color: var(--green);
+  white-space: nowrap;
+  font-size: 13px;
+}
+.mentor-card > p {
+  margin-top: 18px;
+}
+.mentor-expertise strong {
+  color: var(--ink);
+}
+.mentor-links {
+  justify-content: flex-start;
+  margin-top: 18px;
+  gap: 8px 22px;
+}
+.mentor-sources {
+  margin-top: 18px;
+  font-size: 13px;
+}
+.mentor-sources summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: var(--green);
+}
+.mentor-sources ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+.mentor-sources li {
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+.mentor-sources a {
+  color: var(--green);
+  text-decoration: underline;
+}
+.mentor-card .mentor-limits {
+  margin-top: 18px;
+  font-size: 12px;
+}
 .question-row {
   display: flex;
   align-items: end;
@@ -1312,6 +1417,9 @@ input[type="checkbox"] {
     padding: 23px;
   }
   .form-two {
+    grid-template-columns: 1fr;
+  }
+  .mentor-layout {
     grid-template-columns: 1fr;
   }
   .form-section,

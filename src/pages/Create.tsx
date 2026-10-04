@@ -132,6 +132,8 @@ export function Create() {
                   name="fullDescription"
                   rows={5}
                   required
+                  minLength={20}
+                  maxLength={6000}
                   placeholder="What do you want to make, and why does it matter?"
                   onChange={(event) =>
                     event.target.setCustomValidity(
@@ -280,7 +282,7 @@ export function Create() {
           </p>
           <div className="demo-notice mt-6">
             This is a frontend demo. Your opportunity appears in Discover and
-            Your Projects, and resets on refresh.
+            Your Projects in this browser. It is not published to other people.
           </div>
         </aside>
       </div>

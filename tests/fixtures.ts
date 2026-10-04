@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import type { z } from 'zod';
-import type { Candidate, GeminiClient, Grounding, MatchBreakdown, ProjectAnalysis, Research } from '../src/mentor/types.js';
+import type { Candidate, MentorClient, Grounding, MatchBreakdown, ProjectAnalysis, Research } from '../src/mentor/types.js';
 import { inputSchema } from '../src/mentor/schemas.js';
 export const input = inputSchema.parse({projectTitle: 'Retinal image classifier', projectDescription: 'Develop a CNN to detect diabetic retinopathy and design a research experiment.', location: 'Boston, Massachusetts', locationImportance: 'medium'});
 export const analysis: ProjectAnalysis = {primaryDomain: 'Medical AI', domains: ['Medical AI'], technicalSkills: ['Deep Learning'], skillsStudentNeeds: ['Retinal imaging'], researchAreas: ['Retinal imaging'], industries: ['Healthcare'], idealMentorTypes: ['Researcher'], experienceNeeded: ['Experimental design'], mentorshipGoals: ['Model evaluation'], importantKeywords: ['Retinal imaging'], searchConcepts: ['Retinal imaging researchers'], researchRequired: true, locationRequirement: {requestedLocation: input.location!, importance: 'medium', remoteAllowed: true}};
@@ -23,7 +23,7 @@ export function mockPipeline() {
   const research: Research = {text: 'Grounded professional findings', grounding};
   const values: Record<string, unknown> = {analysis, plan, 'discovery-extraction': {candidates}, 'verification-extraction': {candidates}, scoring: {evaluations: candidates.map((c, i) => ({id: c.id, breakdown: breakdown(c, i === 0 ? 80 : 95), locationCompatibility: 'compatible'}))}, explanations: {explanations: candidates.map(c => ({id: c.id, statementIds: ['overlap', 'research']}))}};
   const structured = vi.fn(async <T>(stage: string, _instruction: string, _data: unknown, schema: z.ZodType<T>) => schema.parse(structuredClone(values[stage])));
-  const search = vi.fn(async () => structuredClone(research));
-  const client: GeminiClient = {structured: async (stage, instruction, data, schema) => schema.parse(await structured(stage, instruction, data, schema)), research: search};
+  const search = vi.fn(async (_stage: string, _instruction: string, _data: unknown, _signal: AbortSignal) => structuredClone(research));
+  const client: MentorClient = {structured: async (stage, instruction, data, schema) => schema.parse(await structured(stage, instruction, data, schema)), research: search};
   return {client, structured, search, values, candidates, grounding};
 }

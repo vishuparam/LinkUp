@@ -11,6 +11,8 @@ it('runs entire pipeline offline and ranks evidence-based matches', async () => 
   expect(result.meta).toMatchObject({candidateCount: 2, verifiedCandidateCount: 2, returnedCount: 2});
   expect(m.structured.mock.calls.map(c => c[0])).toEqual(['analysis', 'plan', 'discovery-extraction', 'verification-extraction', 'scoring', 'explanations']);
   expect(m.search).toHaveBeenCalledTimes(2);
+  expect(m.structured.mock.calls[0]![2]).toMatchObject({projectDescription: input.projectDescription});
+  expect(m.search.mock.calls[0]![0]).toBe('discovery');
   expect(result.meta.grounding[0]!.citations[0]).not.toHaveProperty('text');
 });
 it('returns an empty array without fabricated fallback people', async () => {
@@ -29,5 +31,5 @@ it('enforces deadline even if a provider ignores cancellation', async () => {
 });
 it('rejects new explanation claims via nonexistent statement IDs', async () => {
   const m = mockPipeline(); m.values.explanations = {explanations: [{id: 'candidate-1', statementIds: ['agreed-to-mentor']}, {id: 'candidate-2', statementIds: ['research']}]};
-  await expect(findMentors(input, {client: m.client})).rejects.toMatchObject({code: 'GEMINI_ERROR'});
+  await expect(findMentors(input, {client: m.client})).rejects.toMatchObject({code: 'GROQ_ERROR'});
 });
