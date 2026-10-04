@@ -1,21 +1,71 @@
-import { Link } from 'react-router-dom';
-import type { Opportunity } from '../types';
-import { useDemo } from '../context/DemoContext';
-import { Button } from './Button';
-import { Tag } from './Tag';
-
-export function OpportunityCard({ opportunity }: { opportunity: Opportunity }) {
+import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
+import type { Opportunity } from "../types";
+import { useDemo } from "../context/DemoContext";
+import { Button } from "./Button";
+import { Tag } from "./Tag";
+export function OpportunityCard({
+  opportunity: item,
+}: {
+  opportunity: Opportunity;
+}) {
   const { savedIds, toggleSaved } = useDemo();
-  const saved = savedIds.includes(opportunity.id);
-  return <article className="panel flex h-full flex-col">
-    <div className="flex flex-wrap items-center gap-2"><Tag>{opportunity.type}</Tag><span className="text-xs text-stone-500">{opportunity.field}</span></div>
-    <h2 className="mt-5 text-xl font-bold"><Link className="hover:text-emerald-700" to={`/projects/${opportunity.id}`}>{opportunity.name}</Link></h2>
-    <p className="mt-2 flex-1 text-sm leading-relaxed text-stone-600">{opportunity.shortDescription}</p>
-    <div className="my-5 flex flex-wrap gap-2">{opportunity.skillsNeeded.map(skill => <Tag key={skill}>{skill}</Tag>)}</div>
-    <p className="text-xs text-stone-500">{opportunity.remote ? 'Remote · ' : 'In person · '}{opportunity.location}</p>
-    <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-4">
-      <Link className="text-sm font-semibold text-emerald-800 hover:underline" to={`/projects/${opportunity.id}`}>View opportunity →</Link>
-      <Button variant="secondary" aria-label={`${saved ? 'Unsave' : 'Save'} ${opportunity.name}`} aria-pressed={saved} onClick={() => toggleSaved(opportunity.id)}>{saved ? 'Saved ✓' : 'Save'}</Button>
-    </div>
-  </article>;
+  const saved = savedIds.includes(item.id);
+  const reduced = useReducedMotion();
+  return (
+    <motion.article
+      className={`opportunity-card tone-${item.type.toLowerCase()}`}
+      whileHover={reduced ? undefined : { y: -5 }}
+      transition={{ duration: 0.18 }}
+    >
+      <div className="card-top">
+        <span className="opportunity-mark" aria-hidden="true">
+          {item.type === "Project"
+            ? "↗"
+            : item.type === "Nonprofit"
+              ? "✳"
+              : "◈"}
+        </span>
+        <span className="type-badge">{item.type}</span>
+      </div>
+      <p className="card-field">{item.field}</p>
+      <h2>
+        <Link to={`/projects/${item.id}`}>{item.name}</Link>
+      </h2>
+      <p className="card-description">{item.shortDescription}</p>
+      <div className="card-skills">
+        {item.skillsNeeded.map((skill) => (
+          <Tag key={skill}>{skill}</Tag>
+        ))}
+      </div>
+      <div className="card-person">
+        <span className="avatar avatar-small">
+          {item.creator.name
+            .split(" ")
+            .map((word) => word[0])
+            .join("")}
+        </span>
+        <span>
+          {item.creator.name}
+          <small>
+            {item.remote ? "Remote" : "In person"} · {item.location}
+          </small>
+        </span>
+      </div>
+      <div className="card-actions">
+        <Link className="text-link" to={`/projects/${item.id}`}>
+          View opportunity <span aria-hidden="true">↗</span>
+        </Link>
+        <Button
+          variant="secondary"
+          className={saved ? "is-saved" : ""}
+          aria-label={`${saved ? "Unsave" : "Save"} ${item.name}`}
+          aria-pressed={saved}
+          onClick={() => toggleSaved(item.id)}
+        >
+          {saved ? "Saved ✓" : "Save +"}
+        </Button>
+      </div>
+    </motion.article>
+  );
 }
