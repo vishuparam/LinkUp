@@ -15,7 +15,7 @@ export function Layout() {
     previous.current = pathname;
   }, [pathname]);
   return (
-    <div className="site-shell">
+    <div className={`site-shell ${pathname === "/" ? "cinematic-shell" : ""}`}>
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

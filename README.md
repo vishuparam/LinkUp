@@ -97,6 +97,8 @@ Playwright controls a browser for testing and Axe checks common accessibility is
 
 Framer Motion supplies short section reveals, card hover/press feedback, hero scroll movement, and mobile menu transitions. Animations honor reduced-motion preferences. Read [DESIGN-HANDOFF.md](DESIGN-HANDOFF.md) for the exact shared-file changes, animation explanations, and teammate integration notes.
 
+The landing page now has a separate cinematic Three.js network experience. Read [NETWORK-HANDOFF.md](NETWORK-HANDOFF.md) for the current landing architecture, new libraries, performance choices, and preserved team integration. Run `node scripts/test-network.mjs` with the dev server running to verify pinned scrolling, actual 3D pointer response, mobile, and fallback behavior.
+
 ## AI Mentor Finder backend
 
 A stateless Vercel API for evidence-based potential mentor discovery has been added. It preserves this frontend and its existing Vite development/build workflows. Setup, Gemini key handling, API request format, local testing, deployment configuration, security limits, and integration notes are documented in [docs/mentor-finder-backend.md](docs/mentor-finder-backend.md).
