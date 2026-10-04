@@ -68,12 +68,7 @@ try {
     await audit("Landing " + width);
     await noOverflow();
     // Visit each section: jumping to the bottom skips the scroll reveals.
-    for (const selector of [
-      ".possibility-section",
-      ".project-wall-section",
-      ".connection-story",
-      ".network-final",
-    ]) {
+    for (const selector of [".product-reveal"]) {
       await page.locator(selector).scrollIntoViewIfNeeded();
       await page.waitForTimeout(650);
       await audit("Landing section " + selector + " " + width);
@@ -156,7 +151,7 @@ try {
       path: "test-results/details-" + width + ".png",
       fullPage: true,
     });
-    await page.getByRole("button", { name: "Saved ✓" }).click();
+    await page.getByRole("button", { name: /^Saved/ }).click();
     await nav("Saved");
     await page.getByText("Nothing saved yet.").waitFor();
     await nav("Create");
@@ -225,11 +220,11 @@ try {
   }
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base);
-  await page.locator(".network-fallback").waitFor();
+  await page.locator(".portal-poster").waitFor();
   assert.equal(
-    await page.locator(".network-canvas canvas").count(),
+    await page.locator(".portal-media video").count(),
     0,
-    "Reduced motion uses static network",
+    "Reduced motion uses static portal",
   );
   assert.equal(
     await page.locator(".pin-spacer").count(),
